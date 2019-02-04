@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Library from './LibraryComponent';
-import { fetchTags, fetchTasks } from '../redux/ActionCreator';
+import Home from './HomeComponent';
+import { fetchTags, fetchTasks, postProposal } from '../redux/ActionCreator';
 import { connect } from 'react-redux';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { actions } from 'react-redux-form';
 
 const mapStateToProps = state => ({
 	tags: state.tags,
@@ -12,7 +15,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	fetchTags: () => {dispatch(fetchTags())},
-	fetchTasks: () => {dispatch(fetchTasks())}
+	fetchTasks: () => {dispatch(fetchTasks())},
+	resetProposalForm: () => {dispatch(actions.reset('proposalForm'))},
+	postProposal: (proposal) => {dispatch(postProposal(proposal))}
+
 })
 
 class Main extends Component {
@@ -26,8 +32,13 @@ class Main extends Component {
 		return (
 			<React.Fragment>
 				<Header />
-				<div className="container" id="main">
-					<Library tags={this.props.tags} tasks={this.props.tasks}/>
+				<div id="main">
+					<Switch>
+						<Route exact path="/library" component={() => <Library tags={this.props.tags} tasks={this.props.tasks} 
+						postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>}/>
+						<Route path="/home" component={Home} />
+						<Redirect to="/home" />
+					</Switch>
 				</div>
 				<Footer />
 			</React.Fragment>
@@ -35,4 +46,4 @@ class Main extends Component {
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Main)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));

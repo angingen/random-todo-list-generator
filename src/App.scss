@@ -30,6 +30,7 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .tags {
@@ -54,4 +55,9 @@ html, body {
   margin-left: auto;
   text-indent: 30px;
   font-size: 0.8em;
+}
+
+.flex-center-align {
+  flex-direction: column;
+  justify-content: center;
 }

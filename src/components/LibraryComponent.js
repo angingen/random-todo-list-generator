@@ -1,18 +1,181 @@
 import React, { Component } from 'react';
 import { baseURL } from '../shared/baseURL';
-import { Badge, Row,
+import { Badge, Row, Col,
 	Button, ButtonGroup, ButtonToolbar,
-	Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-import { Control, Form } from 'react-redux-form';
+	Card, CardText, CardBody, CardTitle, CardSubtitle,
+	Modal, ModalHeader, ModalBody,
+	Label} from 'reactstrap';
+import { Control, Form, Errors } from 'react-redux-form';
 
-function RenderLibHeader ({toggleModal}) {
-	return (
-		<React.Fragment>
-			<h2 className="flex-container mt-2">Library 
-			<Button className="ml-auto" id="task-proposal" onClick={() => toggleModal()} >Propose my own task!</Button>
-			</h2>
-		</React.Fragment>
-	)
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => (val) && (val.length >= len);
+const isNumber = (val) => !isNaN(Number(val));
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val)
+const maxWords = (len) => (val) => !(val) || (val.split(/\W+/).length <= len)
+const taskTimeRange = (min,max) => (val) => (val>min) && (val<=max);
+
+class RenderLibHeader extends Component {
+	constructor(props) {
+		super(props);
+		this.toggleModal = this.toggleModal.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this)
+		this.state = {
+			modalOpen: false
+		}
+	}
+
+	toggleModal() {
+		this.setState({
+			modalOpen: !this.state.modalOpen
+		})
+	}
+
+	handleSubmit(values) {
+		this.props.postProposal(values);
+		this.props.resetProposalForm();
+		this.toggleModal();
+	}
+
+	render() {
+		return (
+			<React.Fragment>
+				<h2 className="flex-container mt-2">Library 
+				<Button className="ml-auto" id="task-proposal" onClick={this.toggleModal} >Propose my own task!</Button>
+				</h2>
+				<Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
+					<ModalHeader toggle={this.toggleModal}>Task Proosal</ModalHeader>
+					<ModalBody>
+						<Form model="proposalForm" onSubmit={(values) => this.handleSubmit(values)} >
+							<Row className="form-group">
+								<Label htmlFor="author" md={12}>Name</Label>
+								<Col md={12}>
+									<Control.text model=".author" id="author" name="author" 
+									placeholder="" className="form-control" 
+									validators = {{
+										minLength: minLength(3), maxLength: maxLength(30)
+									}} 
+									/>
+									<Errors
+										className="text-danger" 
+										model=".author" 
+										show={{touched: true, focus: false}}
+										messages={{
+											minLength: 'Must be 3 character or more',
+											maxLength: 'Must be 30 character or less'
+										}}
+									/>
+								</Col>
+							</Row>
+
+							<Row className="form-group">
+								<Label htmlFor="taskName" md={12}>Task title</Label>
+								<Col md={12}>
+									<Control.text model=".taskName" id="taskName" name="taskName" 
+									placeholder="" className="form-control" 
+									validators = {{required, maxWords: maxWords(10)}} 
+									/>
+									<Errors
+										className="text-danger" 
+										model=".taskName" 
+										show={{touched: true, focus: false}}
+										messages={{
+											required: 'Required',
+											maxWords: 'Must be 10 words or less'
+										}}
+									/>
+								</Col>
+							</Row>
+
+							<Row className="form-group">
+								<Label htmlFor="estimatedTime" md={12}>Estimated time</Label>
+								<Col md={10}>
+									<Control.text model=".estimatedTime" id="estimatedTime" name="estimatedTime" 
+									placeholder="" 
+									className="form-control" 
+									validators = {{isNumber, taskTimeRange:taskTimeRange(0,12)}} 
+									/>
+									<Errors
+										className="text-danger" 
+										model=".estimatedTime" 
+										show={{touched: true, focus: false}}
+										messages={{
+											isNumber: 'Plese enter a number. ',
+											taskTimeRange: 'Estimated Time of task must not exceed 12 hours or less than 0 hour. '
+										}}
+									/>
+								</Col>
+								<Label htmlFor="estimatedTime" md={2}>hour</Label>
+							</Row>
+							
+							<Row className="form-group">
+								<Label htmlFor="taskDescript" md={12}>Task description</Label>
+								<Col md={12}>
+									<Control.textarea model=".taskDescript" id="taskDescript" name="taskDescript" 
+									placeholder="" 
+									rows="4" className="form-control" 
+									validators = {{required, maxWords: maxWords(50)}} 
+									/>
+									<Errors
+										className="text-danger" 
+										model=".taskDescript" 
+										show={{touched: true, focus: false}}
+										messages={{
+											required: 'Required',
+											maxWords: 'Must be 50 words or less'
+										}}
+									/>
+								</Col>
+							</Row>
+
+
+							<Row className="form-group">
+								<Label htmlFor="email" md={12}>Email</Label>
+								<Col md={12}>
+									<Control.text model=".email" id="email" name="email" 
+									placeholder="" 
+									className="form-control" 
+									validators = {{validEmail}} 
+									/>
+									<Errors
+										className="text-danger" 
+										model=".taskDescript" 
+										show={{touched: true, focus: false}}
+										messages={{
+											validEmail: 'Please enter a valid email address'
+										}}
+									/>
+								</Col>
+							</Row>
+
+							<Row className="form-group">								
+								<Col md={12}>
+									<div className="form-check">
+										<Label checked>
+											<Control.checkbox model=".agree" id="agree" name="agree" 
+											className="form-check-input" 
+											/> {' '}
+											<strong>Inform me of the result of this proposal</strong>
+										</Label>
+									</div>
+								</Col>
+							</Row>
+
+							<div className="form-group flexbox">
+									<Button color="secondary" onClick={this.toggleModal} className="ml-auto">
+                                        Cancle
+                                    </Button>
+                                    <Button type="submit" color="primary" className="ml-1">
+                                        Send Proposal
+                                    </Button>
+                            </div>
+						</Form>
+
+					</ModalBody>
+				</Modal>
+			</React.Fragment>
+		)
+	}
 }
 
 function RenderTags({tags, tagSelector}) {
@@ -149,18 +312,14 @@ function TaskCards({tasks,tagSelected}) {
 	}
 }
 
-
-
 export default class Library extends Component {
 
 	constructor(props) {
 		super(props);
 		this.tagSelector = this.tagSelector.bind(this)
-		this.toggleModal = this.toggleModal.bind(this)
 
 		this.state = {
 			tagSelected: "all",
-			modalOPen: false
 		}
 
 	}
@@ -171,16 +330,11 @@ export default class Library extends Component {
 		})
 	}
 
-	toggleModal() {
-		this.setState({
-			modalOPen: !this.state.modalOPen
-		})
-	}
 
 	render() {
 		return (
 			<div className="container">
-				<RenderLibHeader toggleModal={this.toggleModal} />
+				<RenderLibHeader postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>
 				<TagsList tags={this.props.tags} tagSelector={this.tagSelector}/>
 				<TaskCards tasks={this.props.tasks} tagSelected = {this.state.tagSelected}/>
 			</div>
