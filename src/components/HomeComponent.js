@@ -3,7 +3,7 @@ import { Button, ButtonGroup } from 'reactstrap';
 function Home() {
 	return(
 		<div className="container flex-center-align">
-			<div className="mt-3 text-center">
+
 				<h1>Random To-do List Generator</h1>
 				<h3>Life is better with a plan</h3>
 				<p className="mt-3">
@@ -19,7 +19,7 @@ function Home() {
 	                    Get started now
 	                </Button>
                 </div>
-			</div>
+
 		</div>
 		
 	);
