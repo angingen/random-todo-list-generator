@@ -40,7 +40,7 @@ class RenderLibHeader extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<h2 className="flex-container mt-2">Library 
+				<h2 className="flexbox mt-2">Library 
 				<Button className="ml-auto" id="task-proposal" onClick={this.toggleModal} >Propose my own task!</Button>
 				</h2>
 				<Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
@@ -243,7 +243,7 @@ function RenderTasks({tasks}) {
 				} 
 				else {
 					return (
-						<div className="flex-container"><p className="task-author mt-1">- proposed by {taskItem.author}</p></div>
+						<div className="flexbox"><p className="task-author mt-1">- proposed by {taskItem.author}</p></div>
 					);
 				}
 			}
@@ -260,7 +260,7 @@ function RenderTasks({tasks}) {
 				<div key={taskItem.id} className="col-12 col-md-6 col-lg-4 mt-3 mb-3 flexbox">
 					<Card className="taskCard">
 						<CardBody>
-							<h5 className="flex-container"><div>{taskItem.name}</div><Badge color="danger" className="ml-auto">{taskItem.time}{taskItem.unit}</Badge></h5>
+							<h5 className="flexbox"><div>{taskItem.name}</div><Badge color="danger" className="ml-auto">{taskItem.time}{taskItem.unit}</Badge></h5>
 							<CardText>{taskItem.description}</CardText>
 							<CardSubtitle><TaskAuthor /></CardSubtitle>
 							<div className="space-filler"></div>

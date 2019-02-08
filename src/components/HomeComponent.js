@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
+import { Link } from 'react-router-dom';
 function Home() {
 	return(
 		<div className="container flex-center-align">
@@ -12,12 +13,12 @@ function Home() {
 					All in two simple steps!
 				</p>
 				<div>
-					<Button color="secondary" to="/library" className="ml-auto">
+					<Link to="/library" className="ml-auto btn btn-warning">
 	                    Task Library
-	                </Button>
-	                <Button color="primary" to="./generator" className="ml-1">
+	                </Link>
+	                <Link to="./generator" className="ml-1 btn btn-primary">
 	                    Get started now
-	                </Button>
+	                </Link>
                 </div>
 
 		</div>

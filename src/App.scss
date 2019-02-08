@@ -1,3 +1,4 @@
+/*stiky footer*/
 html, body {
   height: 100%;
   width: 100%;
@@ -18,15 +19,6 @@ html, body {
   display: flex;
 }
 
-.taskCard {
-  align-items: stretch;
-  flex: 1 1 auto;
-}
-
-.flexbox{
-  display: flex;
-}
-
 .App {
   min-height: 100vh;
   display: flex;
@@ -34,10 +26,18 @@ html, body {
   justify-content: center;
 }
 
-.tags {
-  padding: 3px 10px;
-  border-radius: 12px;
+/*task card stretch*/
+.task-author {
+  margin-left: auto;
+  text-indent: 30px;
+  font-size: 0.8em;
 }
+
+.taskCard {
+  align-items: stretch;
+  flex: 1 1 auto;
+}
+
 .card-body {
   height: 100%;
   display: flex;
@@ -48,19 +48,52 @@ html, body {
   flex: 1 0 auto;
 }
 
-.flex-container {
+.flexbox{
   display: flex;
+  flex-wrap: wrap;
 }
 
-.task-author {
-  margin-left: auto;
-  text-indent: 30px;
-  font-size: 0.8em;
+/*task catagory*/
+.tags {
+  padding: 3px 10px;
+  border-radius: 12px;
 }
 
+/*front page center alignment*/
 .flex-center-align {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
+
+/*generator alignment*/
+.title-alignment {
+  align-self: flex-start;
+}
+
+.generator-container {
+  height: 100%;
+  padding-top: 46px;
+  .row {
+    margin: 0px;
+  }
+
+  .generator-card {
+    height: 300px;
+    border-radius: 10px;
+    .card-body {
+      display: flex;
+      justify-content: space-between;
+      h5 {
+        text-align: center;
+        top:-8px;
+      }
+      img {
+        align-self: flex-end;
+      }
+    }
+  }
+}
+

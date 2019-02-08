@@ -3,6 +3,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Library from './LibraryComponent';
 import Home from './HomeComponent';
+import Generator from './GeneratorComponent';
 import { fetchTags, fetchTasks, postProposal } from '../redux/ActionCreator';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
@@ -35,8 +36,10 @@ class Main extends Component {
 				<div id="main">
 					<Switch>
 						<Route exact path="/library" component={() => <Library tags={this.props.tags} tasks={this.props.tasks} 
-						postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>}/>
+						postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>} />
 						<Route path="/home" component={Home} />
+						<Route exact path="/home" component={Home} />
+						<Route exact path="/generator" component={Generator} />
 						<Redirect to="/home" />
 					</Switch>
 				</div>
