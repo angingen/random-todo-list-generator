@@ -184,7 +184,7 @@ function RenderTags({tags, tagSelector}) {
 			return (
 				
 				<ButtonGroup key={tagItem.id}>
-					<Badge color="warning" className="m-1 tags" onClick={() => tagSelector(tagItem.name)} pill>{tagItem.name}</Badge>
+					<Badge color="warning" className="m-1 tags tags-list" onClick={() => tagSelector(tagItem.name)} pill>{tagItem.name}</Badge>
 				</ButtonGroup>
 				
 			)
@@ -332,6 +332,7 @@ export default class Library extends Component {
 
 
 	render() {
+		console.log('render function envoked')
 		return (
 			<div className="container">
 				<RenderLibHeader postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>

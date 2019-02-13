@@ -79,6 +79,11 @@ html, body {
   .row {
     margin: 0px;
   }
+  
+    a, a:hover{
+      text-decoration: none;
+      color:black;
+    }
 
   .generator-card {
     height: 300px;
@@ -88,7 +93,6 @@ html, body {
       justify-content: space-between;
       h5 {
         text-align: center;
-        top:-8px;
       }
       img {
         align-self: flex-end;
@@ -97,3 +101,59 @@ html, body {
   }
 }
 
+.generator-card:hover, .tags-list:hover {
+  cursor: pointer;
+}
+
+#includa-area{
+  height: 150px;
+  width: 100%;
+  overflow: auto;
+}
+
+#exclude-area{
+  height: 150px;
+  width: 100%;
+  overflow: auto;
+  .badge{
+    background-color: gray;
+  }
+}
+
+#slider {
+  width: 100%;
+}
+
+#remainingTasksButton{
+  min-width: 190px;
+  min-height: 45px;
+
+  #remainingTasks {
+    min-width: 10px;
+    text-align: center;
+  }
+}
+
+#remainingTasksButton:hover, #resetButton:hover {
+  font-weight: bold;
+}
+
+#resetButton{
+  text-align: center;
+  margin-left: 15px;
+  min-width: 80px;
+  min-height: 45px;
+}
+
+@media (max-width: 767px) {
+  #remainingTasksButton{
+  width: 100px;
+  min-height: 45px;
+
+  #remainingTasks {
+    min-width: 10px;
+    text-align: center;
+  }
+}
+
+} 

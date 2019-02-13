@@ -37,7 +37,7 @@ export const tagsFailed = (errmess) => ({
 export const tagsLoading = () => ({
 	type: ActionTypes.TAGS_LOADING
 });
-
+ 
 export const fetchTasks = () => (dispatch) => {
 	dispatch(tasksLoading());
 

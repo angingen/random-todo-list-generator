@@ -15,21 +15,21 @@ function GeneratorType() {
 	return(
 		<div className="row mb-3 mt-3 align-self-center col-12">
 			<div className="col-md-6">
-				<Card className="generator-card">
+				<Link id="challengeLink" to="/generator/preference" className="generator-card card">
 					<CardBody>
 						<h5>A challenge for your day</h5>
 						<img src="/assets/images/logo.png" alt="challenge"/>
 					</CardBody>
-				</Card>
+				</Link>
 			</div>
 
-			<div className="col-md-6">
-				<Card className="generator-card">
+			<div id="todolistLink" className="col-md-6">
+				<Link to="/generator/preference" className="generator-card card">
 					<CardBody>
 						<h5>A to-do list for your week</h5>
 						<img src="/assets/images/logo.png" alt="list"/>
 					</CardBody>
-				</Card>
+				</Link>
 			</div>
 		</div>
 	);

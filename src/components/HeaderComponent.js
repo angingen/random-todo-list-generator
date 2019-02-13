@@ -26,7 +26,7 @@ class Header extends Component {
 				<Navbar color='light' light expand="md">
 					<div className="container">
 						<Link className="navbar-brand" to="/home">RtdLG</Link>
-						<NavbarToggler tonClick={this.toggle} />
+						<NavbarToggler onClick={this.toggle} />
 						<Collapse isOpen={this.state.isOpen} navbar>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
