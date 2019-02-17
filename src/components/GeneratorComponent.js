@@ -24,7 +24,7 @@ function GeneratorType() {
 			</div>
 
 			<div id="todolistLink" className="col-md-6">
-				<Link to="/generator/preference" className="generator-card card">
+				<Link to="/generator/listpreference" className="generator-card card">
 					<CardBody>
 						<h5>A to-do list for your week</h5>
 						<img src="/assets/images/logo.png" alt="list"/>

@@ -5,7 +5,8 @@ import logger from 'redux-logger';
 import { Tags } from './tags';
 import { Tasks } from './tasks';
 import { InitialProposal } from './proposalForm';
-import { InitialPreference } from './preferenceForm'
+import { InitialPreference } from './preferenceForm';
+import { InitialListSample } from './listSampleForm';
 
 export const ConfigureStore = () => {
 	const store = createStore(
@@ -14,7 +15,8 @@ export const ConfigureStore = () => {
 			tasks: Tasks,
 			...createForms({
 				proposalForm: InitialProposal,
-				preferenceForm: InitialPreference
+				preferenceForm: InitialPreference,
+				listSampleForm: InitialListSample
 			})
 		}),
 		applyMiddleware(thunk,logger)

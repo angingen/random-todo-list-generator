@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,displayTasksNumber,mouseOverHandler,mouseOutHandler}){
+function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,displayTasksNumber,mouseOverHandler,mouseOutHandler,pathname}){
 	function RenderTags({tags,toggleTagsIn,toggleTagsEx}) {
 		if (tags != null) {
 			const tag = tags.map((tagItem) => {
@@ -50,16 +50,16 @@ function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,dis
 		}
 	}
 
-	function RemainingTaskNum({preferenceForm,tasks,displayTasksNumber,mouseOverHandler,mouseOutHandler}){
+	function RemainingTaskNum({preferenceForm,tasks,displayTasksNumber,mouseOverHandler,mouseOutHandler,pathname}){
 		const numberOfTasks = tasks.tasks.filter((task)=> {
 			let arr1 = preferenceForm.taskExclude.concat(task.category);
 			let set1 = new Set(arr1);
 			return (arr1.length == set1.size && task.time<=preferenceForm.time)
 		});
-		
+
 		return(
 			<Col className="d-flex align-items-end col-8">
-				<Link id="remainingTasksButton" to="/generator/todolist" className="ml-auto btn btn-outline-danger" 
+				<Link id="remainingTasksButton" to={true? pathname + '/listsample':pathname} className="ml-auto btn btn-outline-danger" 
 					onMouseEnter={mouseOverHandler}
 					onMouseLeave={mouseOutHandler}>
 						{displayTasksNumber =='none'? 'Next':'Remaining Tasks'}
@@ -142,7 +142,8 @@ function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,dis
 										tasks={tasks} 
 										displayTasksNumber={displayTasksNumber} 
 										mouseOverHandler={mouseOverHandler} 
-										mouseOutHandler={mouseOutHandler}/>
+										mouseOutHandler={mouseOutHandler}
+										pathname={pathname} />
 								</Row>
 							</Form>
 							
@@ -187,7 +188,8 @@ export default class Preference extends Component {
 					toggleTagsEx={this.props.toggleTagsEx}
 					displayTasksNumber={this.state.displayTasksNumber}
 					mouseOverHandler={this.mouseOverHandler}
-					mouseOutHandler={this.mouseOutHandler} />
+					mouseOutHandler={this.mouseOutHandler}
+					pathname={this.props.location.pathname} />
 			</>
 		);
 	}

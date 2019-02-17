@@ -156,4 +156,18 @@ html, body {
   }
 }
 
-} 
+}
+
+.task-container{
+  min-height: 100px;
+  max-height: 120px;
+}
+
+.pastday {
+  background-color: gray;
+}
+
+.task-container-todolist {
+  min-height: 200px;
+  max-height: 300px;
+}
