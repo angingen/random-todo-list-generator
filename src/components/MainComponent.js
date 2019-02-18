@@ -48,36 +48,45 @@ class Main extends Component {
 				<Header />
 				<div id="main">
 					<Switch>
-						<Route exact path="/library" component={() => <Library tags={this.props.tags} tasks={this.props.tasks} 
-						postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>} />
+						<Route exact path="/library" component={() => 
+							<Library 
+								tags={this.props.tags} 
+								tasks={this.props.tasks} 
+								postProposal={this.props.postProposal} 
+								resetProposalForm={this.props.resetProposalForm}/>} />
 						<Route path="/home" component={Home} />
 						<Route exact path="/home" component={Home} />
 						<Route exact path="/generator" component={Generator} />
-						<Route exact path="/generator/listpreference" component={() => <Preference tags={this.props.tags}
-							tasks={this.props.tasks} 
-							preferenceForm={this.props.preferenceForm} 
-							toggleTagsIn={this.props.toggleTagsIn}
-							toggleTagsEx={this.props.toggleTagsEx}
-							location={this.props.location} /> } />
-						<Route exact path="/generator/listpreference/listsample" component={() => <TodoListSample tasks={this.props.tasks} 
-							preferenceForm={this.props.preferenceForm}
-							listSampleForm={this.props.listSampleForm}
-							toggleSelect={this.props.toggleSelect}/> } />
-						<Route exact path="/generator/listpreference/listsample/todolist" component={() => <TodoList tasks={this.props.tasks}
-							preferenceForm={this.props.preferenceForm} 
-							listSampleForm={this.props.listSampleForm}
-							resetpreferenceForm={this.props.resetpreferenceForm}
-							resetListSampleForm={this.props.resetListSampleForm} /> } />
-						<Route exact path="/generator/challengepreference" component={() => <Preference tags={this.props.tags}
-							tasks={this.props.tasks} 
-							preferenceForm={this.props.preferenceForm} 
-							toggleTagsIn={this.props.toggleTagsIn}
-							toggleTagsEx={this.props.toggleTagsEx}
-							location={this.props.location} /> } />
-						<Route exact path="/generator/challengepreference/challenge" component={() => <Challenge tasks={this.props.tasks}
-							preferenceForm={this.props.preferenceForm} 
-							resetpreferenceForm={this.props.resetpreferenceForm}
-							resetListSampleForm={this.props.resetListSampleForm} /> } />
+						<Route exact path="/generator/listpreference" component={() => 
+							<Preference tags={this.props.tags}
+								tasks={this.props.tasks} 
+								preferenceForm={this.props.preferenceForm} 
+								toggleTagsIn={this.props.toggleTagsIn}
+								toggleTagsEx={this.props.toggleTagsEx}
+								location={this.props.location} /> } />
+						<Route exact path="/generator/listpreference/listsample" component={() => 
+							<TodoListSample tasks={this.props.tasks} 
+								preferenceForm={this.props.preferenceForm}
+								listSampleForm={this.props.listSampleForm}
+								toggleSelect={this.props.toggleSelect}/> } />
+						<Route exact path="/generator/listpreference/listsample/todolist" component={() => 
+							<TodoList tasks={this.props.tasks}
+								preferenceForm={this.props.preferenceForm} 
+								listSampleForm={this.props.listSampleForm}
+								resetpreferenceForm={this.props.resetpreferenceForm}
+								resetListSampleForm={this.props.resetListSampleForm} /> } />
+						<Route exact path="/generator/challengepreference" component={() => 
+							<Preference tags={this.props.tags}
+								tasks={this.props.tasks} 
+								preferenceForm={this.props.preferenceForm} 
+								toggleTagsIn={this.props.toggleTagsIn}
+								toggleTagsEx={this.props.toggleTagsEx}
+								location={this.props.location} /> } />
+						<Route exact path="/generator/challengepreference/challenge" component={() => 
+							<Challenge tasks={this.props.tasks}
+								preferenceForm={this.props.preferenceForm} 
+								resetpreferenceForm={this.props.resetpreferenceForm}
+								resetListSampleForm={this.props.resetListSampleForm} /> } />
 						<Redirect to="/home" />
 					</Switch>
 				</div>

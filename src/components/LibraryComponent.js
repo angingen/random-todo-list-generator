@@ -3,8 +3,8 @@ import { baseURL } from '../shared/baseURL';
 import { Badge, Row, Col,
 	Button, ButtonGroup, ButtonToolbar,
 	Card, CardText, CardBody, CardTitle, CardSubtitle,
-	Modal, ModalHeader, ModalBody,
-	Label} from 'reactstrap';
+	Modal, ModalHeader, ModalBody, Label,
+	Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 
 const required = (val) => val && val.length;
@@ -19,9 +19,12 @@ class RenderLibHeader extends Component {
 	constructor(props) {
 		super(props);
 		this.toggleModal = this.toggleModal.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.hoverDisplay = this.hoverDisplay.bind(this);
+		this.unhoverDisplay = this.unhoverDisplay.bind(this);
 		this.state = {
-			modalOpen: false
+			modalOpen: false,
+			buttonDisplay: {span:'block',p:'none'}
 		}
 	}
 
@@ -29,6 +32,22 @@ class RenderLibHeader extends Component {
 		this.setState({
 			modalOpen: !this.state.modalOpen
 		})
+	}
+
+	hoverDisplay() {
+		if (this.state.buttonDisplay.p == 'none') {
+			this.setState({
+				buttonDisplay: {span:'none',p:'block'}
+			})
+		}
+	}
+
+	unhoverDisplay() {
+		if (this.state.buttonDisplay.span == 'none') {
+			this.setState({
+				buttonDisplay: {span:'block',p:'none'}
+			})
+		}
 	}
 
 	handleSubmit(values) {
@@ -41,7 +60,9 @@ class RenderLibHeader extends Component {
 		return (
 			<React.Fragment>
 				<h2 className="flexbox mt-2">Library 
-				<Button className="ml-auto" id="task-proposal" onClick={this.toggleModal} >Propose my own task!</Button>
+				<Button className="ml-auto" id="task-proposal" onMouseEnter={this.hoverDisplay}
+					onClick={this.toggleModal}
+					onMouseLeave={this.unhoverDisplay} ><span className="fa fa-lg fa-plus" style={{display:this.state.buttonDisplay.span}}> </span> <p className="mb-0" style={{display:this.state.buttonDisplay.p}}>Propose my own task!</p></Button>
 				</h2>
 				<Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>Task Proosal</ModalHeader>
@@ -178,13 +199,13 @@ class RenderLibHeader extends Component {
 	}
 }
 
-function RenderTags({tags, tagSelector}) {
+function RenderTags({tags, tagSelector, tagSelected}) {
 	if (tags != null) {
 		const tag = tags.map((tagItem) => {
 			return (
 				
 				<ButtonGroup key={tagItem.id}>
-					<Badge color="warning" className="m-1 tags tags-list" onClick={() => tagSelector(tagItem.name)} pill>{tagItem.name}</Badge>
+					<Badge color={tagItem.name==tagSelected? "danger":"warning"} className="m-1 tags tags-list" onClick={() => tagSelector(tagItem.name)} pill>{tagItem.name}</Badge>
 				</ButtonGroup>
 				
 			)
@@ -206,7 +227,7 @@ function RenderTags({tags, tagSelector}) {
 	}
 }
 
-function TagsList({tags, tagSelector}) {
+function TagsList({tags, tagSelector,tagSelected}) {
 	if (tags.isLoading) {
 		return (
 			<div className="container">
@@ -226,7 +247,7 @@ function TagsList({tags, tagSelector}) {
 	else {
 		return (
 			<React.Fragment>
-				<RenderTags tags={tags.tags} tagSelector={tagSelector}/>
+				<RenderTags tags={tags.tags} tagSelector={tagSelector} tagSelected={tagSelected}/>
 			</React.Fragment>
 		)
 	}
@@ -249,11 +270,13 @@ function RenderTasks({tasks}) {
 			}
 
 			const cardTags = taskItem.category.map((tag) => {
-				return (
-					<ButtonGroup key={taskItem.category.indexOf(tag)}>
-						<Badge color="info" className="m-1 tags" pill>{tag}</Badge>
-					</ButtonGroup>
-				);
+				if (tag != "all"){
+					return (
+						<ButtonGroup key={taskItem.category.indexOf(tag)}>
+							<Badge color="info" className="m-1 tags" pill>{tag}</Badge>
+						</ButtonGroup>
+					);
+				}
 			});
 
 			return (
@@ -286,7 +309,7 @@ function RenderTasks({tasks}) {
 	}
 }
 
-function TaskCards({tasks,tagSelected}) {
+function TaskCards({tasks,tasksSelected}) {
 	if (tasks.isLoading) {
 		return (
 			<div className="container">
@@ -306,7 +329,7 @@ function TaskCards({tasks,tagSelected}) {
 	else {
 		return (
 			<React.Fragment>
-				<RenderTasks tasks={tasks.tasks.filter(task => task.category.includes(tagSelected))} />
+				<RenderTasks tasks={tasksSelected} />
 			</React.Fragment>
 		)
 	}
@@ -316,29 +339,116 @@ export default class Library extends Component {
 
 	constructor(props) {
 		super(props);
-		this.tagSelector = this.tagSelector.bind(this)
-
+		this.tagSelector = this.tagSelector.bind(this);
+		this.pageNext = this.pageNext.bind(this);
+		this.pagePrev = this.pagePrev.bind(this);
+		this.changePage = this.changePage.bind(this);
 		this.state = {
 			tagSelected: "all",
+			tasksSelected:[],
+			tasksInCurrentPage:[],
+			currentPage:1,
+			tasksPerPage:6,
+			totoalPage:null
 		}
 
 	}
 
 	tagSelector(tag) {
 		this.setState({
-			tagSelected: tag
+			tagSelected: tag,
+			tasksSelected: this.props.tasks.tasks.filter(task => task.category.includes(tag)),
+			tasksInCurrentPage: this.props.tasks.tasks.filter(task => task.category.includes(tag)).slice(0,this.state.tasksPerPage),
+			totoalPage: Math.ceil(this.props.tasks.tasks.filter(task => task.category.includes(tag)).length/this.state.tasksPerPage)
 		})
 	}
 
+	componentDidMount() {
+		if (this.props.tasks.tasks){
+			this.setState({
+				tasksSelected: this.props.tasks.tasks,
+				tasksInCurrentPage:this.props.tasks.tasks.slice(0,this.state.tasksPerPage),
+				totoalPage: Math.ceil(this.props.tasks.tasks.length/this.state.tasksPerPage)
+			});
+		}
+	}
+
+	pageNext() {
+		if (this.state.currentPage!=this.state.totoalPage){
+			const pageNum = this.state.currentPage + 1
+			this.setState({
+				currentPage:pageNum,
+				tasksInCurrentPage: this.state.tasksSelected.slice(this.state.tasksPerPage*(pageNum-1),this.state.tasksPerPage*(pageNum))
+			})
+		}
+	}
+
+	pagePrev() {
+		if (this.state.currentPage!=1){
+			const pageNum = this.state.currentPage - 1
+			this.setState({
+				currentPage:pageNum,
+				tasksInCurrentPage: this.state.tasksSelected.slice(this.state.tasksPerPage*(pageNum-1),this.state.tasksPerPage*(pageNum))
+			})
+		}
+	}
+
+	changePage(pageNum) {
+		this.setState({
+			currentPage:pageNum+1,
+			tasksInCurrentPage: this.state.tasksSelected.slice(this.state.tasksPerPage*(pageNum),this.state.tasksPerPage*(pageNum+1))
+		})
+	}
 
 	render() {
-		console.log('render function envoked')
+		console.log('render function envoked');
 		return (
 			<div className="container">
 				<RenderLibHeader postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>
-				<TagsList tags={this.props.tags} tagSelector={this.tagSelector}/>
-				<TaskCards tasks={this.props.tasks} tagSelected = {this.state.tagSelected}/>
+				<TagsList tags={this.props.tags} tagSelector={this.tagSelector} tagSelected={this.state.tagSelected}/>
+				<TaskCards tasks={this.props.tasks} tasksSelected = {this.state.tasksInCurrentPage}/>
+				<PageNav tasks={this.props.tasks} 
+					currentPage={this.state.currentPage} 
+					totoalPage={this.state.totoalPage}
+					pagePrev={this.pagePrev}
+					pageNext={this.pageNext}
+					changePage={this.changePage} />
 			</div>
 		);
+	}
+}
+
+function PageNav({tasks,currentPage,totoalPage,pagePrev,pageNext,changePage}) {
+	const pageNavNum = [...Array(totoalPage)].map((e,i)=>
+				<PaginationItem key={i} active={currentPage==i+1} onClick={()=>{changePage(i)}}>
+		          	<div className="page-link" aria-label="Previous">
+				        <span aria-hidden="true">{i+1}</span>
+				  	</div>
+		        </PaginationItem>
+		)
+	if (!tasks.isLoading && !tasks.errMess && totoalPage>1 ) {
+		return(
+			<div className="row">
+				<div className="m-auto">
+					<Pagination aria-label="Page navigation">
+				        <PaginationItem disabled={currentPage==1} onClick={pagePrev}>
+				          <div className="page-link" aria-label="Previous">
+				          	<span aria-hidden="true">«</span>
+				          </div>
+				        </PaginationItem>
+				        	{pageNavNum}
+				        <PaginationItem disabled={currentPage==totoalPage} onClick={pageNext}>
+				          <div className="page-link" aria-label="Previous">
+				          	<span aria-hidden="true">»</span>
+				          </div>
+				        </PaginationItem>
+				      </Pagination>
+				</div>
+			</div>
+		);
+	} else {
+		return(
+			<div></div>
+		)
 	}
 }
