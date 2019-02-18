@@ -7,6 +7,7 @@ import Generator from './GeneratorComponent';
 import Preference from './PreferenceComponent';
 import TodoListSample from './TodoListSampleComponent';
 import TodoList from './TodoListComponent';
+import Challenge from './ChallengeComponent'
 
 import { fetchTags, fetchTasks, postProposal } from '../redux/ActionCreator';
 import { connect } from 'react-redux';
@@ -66,8 +67,17 @@ class Main extends Component {
 							preferenceForm={this.props.preferenceForm} 
 							listSampleForm={this.props.listSampleForm}
 							resetpreferenceForm={this.props.resetpreferenceForm}
-							resetListSampleForm={this.props.resetListSampleForm} /> } />	
-						}
+							resetListSampleForm={this.props.resetListSampleForm} /> } />
+						<Route exact path="/generator/challengepreference" component={() => <Preference tags={this.props.tags}
+							tasks={this.props.tasks} 
+							preferenceForm={this.props.preferenceForm} 
+							toggleTagsIn={this.props.toggleTagsIn}
+							toggleTagsEx={this.props.toggleTagsEx}
+							location={this.props.location} /> } />
+						<Route exact path="/generator/challengepreference/challenge" component={() => <Challenge tasks={this.props.tasks}
+							preferenceForm={this.props.preferenceForm} 
+							resetpreferenceForm={this.props.resetpreferenceForm}
+							resetListSampleForm={this.props.resetListSampleForm} /> } />
 						<Redirect to="/home" />
 					</Switch>
 				</div>

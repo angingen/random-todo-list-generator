@@ -59,7 +59,7 @@ function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,dis
 
 		return(
 			<Col className="d-flex align-items-end col-8">
-				<Link id="remainingTasksButton" to={true? pathname + '/listsample':pathname} className="ml-auto btn btn-outline-danger" 
+				<Link id="remainingTasksButton" to={pathname=="/generator/listpreference"? pathname + '/listsample':pathname + '/challenge'} className="ml-auto btn btn-outline-danger" 
 					onMouseEnter={mouseOverHandler}
 					onMouseLeave={mouseOutHandler}>
 						{displayTasksNumber =='none'? 'Next':'Remaining Tasks'}
@@ -181,7 +181,8 @@ export default class Preference extends Component {
 	render() {
 		return(
 			<>
-				<TaskPreference tags={this.props.tags}
+				<TaskPreference 
+					tags={this.props.tags}
 					tasks={this.props.tasks} 
 					preferenceForm={this.props.preferenceForm}
 					toggleTagsIn={this.props.toggleTagsIn}
