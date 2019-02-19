@@ -1,5 +1,5 @@
-$card-hv-ch: #FCD0BA;
-$card-hv-ls: #F1828D;
+$card-hv-ch: #FEFAD4;
+$card-hv-ls: #FEFAD4;
 $pale-gray: #EEEBE7;
 $text-hl:#FEFAD4;
 $text-df:#212529;
@@ -167,6 +167,8 @@ html, body {
           
         img {
           align-self: flex-end;
+          width: 150px;
+          height: 150px;
         }
       }
     }
@@ -408,5 +410,9 @@ html, body {
     left: 0;
     top: 0;
   }
+}
+
+.spacefiller-img{
+  width: 100%;
 }
 

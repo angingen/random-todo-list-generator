@@ -74,7 +74,7 @@ function RenderTaskContainer({listSampleForm,randomTasks}){
 		<div className="row d-flex">
 			{taskContainer}
 			<div className="col-12 col-md-6 p-1 flexbox align-items-end">
-				<img src="/assets/images/challenge.png" alt="challenge" className="mt-auto ml-auto" />
+				<img src="/assets/images/spacefiller.png" alt="challenge" className="mt-auto ml-auto spacefiller-img" />
 			</div>
 		</div>
 	)
