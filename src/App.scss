@@ -67,6 +67,11 @@ h2 {
   background-color: $cs-pink;
   border: 1px solid $cs-pink;
 }
+
+div.btn-toolbar .tags-list:hover {
+  cursor: pointer;
+}
+
 /*stiky footer*/
 html, body {
   height: 100%;
@@ -191,6 +196,9 @@ html, body {
   height: 100%;
   padding-top: 100px;
   min-height: 700px;
+  .tags-list:hover {
+      cursor: pointer;
+  }
 }
 /*challenge layout*/
 .challenge-container{
@@ -223,7 +231,7 @@ html, body {
 .header-text {
   font-size: 1.25rem;
 }
-
+/*preference setting*/
 #includa-area{
   height: 150px;
   width: 100%;
