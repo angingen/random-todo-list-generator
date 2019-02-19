@@ -19,7 +19,7 @@ function GeneratorHeader() {
 function GeneratorType() {
 	return(
 		<div className="row mb-3 mt-3 align-self-center col-12">
-			<div className="col-md-6">
+			<div className="col-sm-6">
 				<Link id="challengeLink" to="/generator/challengepreference" className="generator-card card hvr-fade">
 					<CardBody>
 						<h2 className="header-text-sub">A challenge for your day</h2>
@@ -28,7 +28,7 @@ function GeneratorType() {
 				</Link>
 			</div>
 
-			<div id="todolistLink" className="col-md-6">
+			<div id="todolistLink" className="col-sm-6">
 				<Link to="/generator/listpreference" className="generator-card card hvr-fade">
 					<CardBody>
 						<h2 className="header-text-sub">A to-do list for your week</h2>

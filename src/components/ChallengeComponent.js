@@ -169,7 +169,7 @@ export default class Challenge extends Component {
 			<>
 			<div className="container position-relative ">
 				<ChallengeHeader tasks={this.props.tasks} randomTasks={this.state.randomTasks}/>
-				<div className="challenge-container align-items-center d-flex">
+				<div id="section-to-print" className="challenge-container align-items-center d-flex">
 					<TaskBody tasks={this.props.tasks} 
 					preferenceForm={this.props.preferenceForm} 
 					randomTasks={this.state.randomTasks}

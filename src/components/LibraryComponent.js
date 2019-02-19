@@ -63,7 +63,10 @@ class RenderLibHeader extends Component {
 				<h2 className="flexbox mt-2">Library 
 				<Button className="ml-auto" id="task-proposal" onMouseEnter={this.hoverDisplay}
 					onClick={this.toggleModal}
-					onMouseLeave={this.unhoverDisplay} ><span className="fa fa-lg fa-plus" style={{display:this.state.buttonDisplay.span}}> </span> <p className="mb-0" style={{display:this.state.buttonDisplay.p}}>Propose my own task!</p></Button>
+					onMouseLeave={this.unhoverDisplay} >
+						<span className="fa fa-lg fa-plus" style={{display:this.state.buttonDisplay.span}}> </span> 
+						<p className="mb-0" style={{display:this.state.buttonDisplay.p}}>Propose my own task!</p>
+				</Button>
 				</h2>
 				<Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>Task Proosal</ModalHeader>
@@ -443,7 +446,7 @@ export default class Library extends Component {
 	render() {
 		console.log('render function envoked');
 		return (
-			<div className="container">
+			<div id="section-to-print" className="container">
 				<RenderLibHeader postProposal={this.props.postProposal} 
 					resetProposalForm={this.props.resetProposalForm} />
 				<TagsList tags={this.props.tags} 	

@@ -1,10 +1,72 @@
-$card-hv-ch: #B7E1E4;
-$card-hv-ls: #B7E1E4;
+$card-hv-ch: #FCD0BA;
+$card-hv-ls: #F1828D;
 $pale-gray: #EEEBE7;
-$text-hl:#B7E1E4;
+$text-hl:#FEFAD4;
 $text-df:#212529;
+/*color scheme*/
+$cs-green:#8FB9A8;
+$cs-green-dk:#273f35;
+$cs-yellow:#FEFAD4;
+$cs-pink-lt:#FCD0BA;
+$cs-pink-lt-hv:#f99b6c;
+$cs-pink:#F1828D;
+$cs-purple-dk:#765D69;
 
+.cs-background{
+  background-color: snow;
+  /*background-image: repeating-linear-gradient(180deg,
+      #8FB9A8 0 1%,
+      #FEFAD4 20% 21%,
+      #FCD0BA 40% 41%,
+      #F1828D 60% 61%,
+      #765D69 99% 100%
+    );*/
+}
 
+h2 {
+  color: $cs-green-dk;
+}
+
+.text-white{
+  color: white;
+}
+
+.bg-gr{
+  background-color: $cs-green;
+}
+
+#task-proposal{
+  background-color: $cs-purple-dk;
+  border: 1px solid $cs-purple-dk;
+
+}
+
+.badge-info{
+  background-color: $cs-green;
+}
+
+.badge-warning, .btn-warning{
+  background-color: $cs-pink-lt;
+  border: 1px solid $cs-pink-lt;
+}
+.btn-warning:hover {
+  background-color: $cs-pink-lt-hv;
+  border: 1px solid $cs-pink-lt-hv;
+}
+
+.btn-primary{
+  background-color: $cs-green;
+  border: 1px solid $cs-green;
+}
+.btn-primary:hover{
+  background-color: $cs-green-dk; 
+  border: 1px solid $cs-green-dk;
+}
+
+.badge-danger, .btn-danger:hover{
+  background-color: $cs-pink;
+  border: 1px solid $cs-pink;
+}
 /*stiky footer*/
 html, body {
   height: 100%;
@@ -14,7 +76,7 @@ html, body {
 }
 
 #footer {
-  background-color: grey;
+  background-color: $cs-purple-dk;
   height: 50px;
   width: 100%;
   padding-top: 10px;
@@ -172,7 +234,18 @@ html, body {
   overflow: auto;
   .badge{
     background-color: $pale-gray;
+    border: 1px solid $pale-gray
   }
+}
+
+.btn-outline-danger {
+  color: $cs-pink;
+  border-color: $cs-pink;
+}
+
+.btn-outline-danger:hover {
+  background-color: $cs-pink;
+  border-color: $cs-pink;
 }
 
 #slider {
@@ -210,9 +283,6 @@ html, body {
       text-align: center;
     }
   }
-  .generator-page-container{
-    min-height: 900px;
-  }
   .preference-container{
     min-height: 1000px;
     padding-top: 150px;
@@ -231,7 +301,7 @@ html, body {
   }
 }
 
-@media (max-width: 567px) {
+@media (max-width: 576px) {
   .list-page-container{
     padding-top: 250px;
   }
@@ -248,6 +318,9 @@ html, body {
     font-size: 0.9rem;
   }
 
+  .generator-page-container{
+    min-height: 850px;
+  }
 
   h2{
     font-size: 1.85rem;
@@ -264,7 +337,17 @@ html, body {
       font-size: 0.75rem;
     }
   }
+  
+  h1{
+    font-size: 1.3rem;
+  }
+  h3{
+    font-size: 1.15rem;
+  }
 
+  p.home-text{
+    font-size: 0.6rem;
+  }
 }
 
 .task-container{
@@ -277,6 +360,8 @@ html, body {
 }
 
 .task-container-todolist {
+  flex-grow: 1;
+  min-height: 125px;
   max-height: 300px;
   overflow: auto;
   p:nth-child(1){
@@ -306,5 +391,22 @@ html, body {
 .hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
   background-color: $card-hv-ch;
   color: white;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+    .btn {
+      display: none;
+    }
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 

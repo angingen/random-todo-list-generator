@@ -47,7 +47,7 @@ class Main extends Component {
 		return (
 			<React.Fragment>
 				<Header />
-				<div id="main">
+				<div id="main" className="cs-background">
 					<Switch>
 						<Route exact path="/library" component={() => 
 							<Library 

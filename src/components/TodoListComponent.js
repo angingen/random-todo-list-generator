@@ -71,7 +71,12 @@ function RenderTaskContainer({listSampleForm,randomTasks}){
 		});
 
 	return (
-		<div className="row d-flex">{taskContainer}</div>
+		<div className="row d-flex">
+			{taskContainer}
+			<div className="col-12 col-md-6 p-1 flexbox align-items-end">
+				<img src="/assets/images/challenge.png" alt="challenge" className="mt-auto ml-auto" />
+			</div>
+		</div>
 	)
 }
 
@@ -192,9 +197,9 @@ export default class TodoList extends Component {
 	render() {
 		return(
 			<>
-				<div className="container position-relative ">
+				<div className="container position-relative">
 					<ListHeader tasks={this.props.tasks} randomTasks={this.state.randomTasks}/>
-					<div className="list-page-container d-flex">
+					<div id="section-to-print" className="list-page-container d-flex">
 						<ListBody tasks={this.props.tasks} 
 							preferenceForm={this.props.preferenceForm} 
 							listSampleForm={this.props.listSampleForm} 

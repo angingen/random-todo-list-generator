@@ -23,9 +23,9 @@ class Header extends Component {
 		return (
 			<div id="header">
 				
-				<Navbar color='light' light expand="md">
+				<Navbar className="bg-gr nav-dark" dark expand="md">
 					<div className="container">
-						<Link className="navbar-brand" to="/home">RtdLG</Link>
+						<Link className="navbar-brand" to="/home"><strong>RtdLG</strong></Link>
 						<NavbarToggler onClick={this.toggle} />
 						<Collapse isOpen={this.state.isOpen} navbar>
 							<Nav className="ml-auto" navbar>
@@ -37,9 +37,6 @@ class Header extends Component {
 								</NavItem>
 								<NavItem>
 									<Link className="nav-link" to='/library'><span className="fa fa-book fa-lg"></span> Library</Link>
-								</NavItem>
-								<NavItem>
-									<Link className="nav-link" to='/'><span className="fa fa-info-circle fa-lg"></span> Help</Link>
 								</NavItem>
 							</Nav>
 						</Collapse>

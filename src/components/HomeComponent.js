@@ -7,12 +7,12 @@ function Home() {
 
 				<h1>Random To-do List Generator</h1>
 				<h3>Life is better with a plan</h3>
-				<p className="mt-3">
+				<p className="mt-3 home-text">
 					Generator your own to-do list from a wide variaty of tasks.<br/>
 					Customize your random section to best suit your neeed. <br/>
 					All in two simple steps!
 				</p>
-				<div>
+				<div className="home-buttons">
 					<Link to="/library" className="ml-auto btn btn-warning">
 	                    Task Library
 	                </Link>
