@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { BreadCrumb, BreadCrumbItem,
+import { Breadcrumb, BreadcrumbItem,
 	Card, CardTitle, CardText, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function GeneratorHeader() {
 	return(
 		<React.Fragment>
-				<h2 className="position-absolute mt-2">Random To-do List Generator</h2>
+				<div className="position-absolute mt-2">
+					<h2 >Task Generator </h2>
+					<p className="m-1"><strong> Select a generator type:</strong><br/>
+						Would like a random task for today? Try <span className="highligt-text">「A challenge for your day」</span>! Or get a to-do list with random tasks by <span className="highligt-text">「A to-do list for your week」</span>!
+					</p>
+				</div>
 		</React.Fragment>
 	);
 }
@@ -15,19 +20,19 @@ function GeneratorType() {
 	return(
 		<div className="row mb-3 mt-3 align-self-center col-12">
 			<div className="col-md-6">
-				<Link id="challengeLink" to="/generator/challengepreference" className="generator-card card">
+				<Link id="challengeLink" to="/generator/challengepreference" className="generator-card card hvr-fade">
 					<CardBody>
-						<h5>A challenge for your day</h5>
-						<img src="/assets/images/logo.png" alt="challenge"/>
+						<h2 className="header-text-sub">A challenge for your day</h2>
+						<img src="/assets/images/challenge.png" alt="challenge"/>
 					</CardBody>
 				</Link>
 			</div>
 
 			<div id="todolistLink" className="col-md-6">
-				<Link to="/generator/listpreference" className="generator-card card">
+				<Link to="/generator/listpreference" className="generator-card card hvr-fade">
 					<CardBody>
-						<h5>A to-do list for your week</h5>
-						<img src="/assets/images/logo.png" alt="list"/>
+						<h2 className="header-text-sub">A to-do list for your week</h2>
+						<img src="/assets/images/challenge.png" alt="list"/>
 					</CardBody>
 				</Link>
 			</div>
@@ -44,7 +49,7 @@ export default class Generator extends Component {
 	render() {
 		return (
 			<>
-			<div className="container position-relative">
+			<div className="container position-relative generator-page-container">
 				<GeneratorHeader />
 				<div className="generator-container d-flex">
 					<GeneratorType />

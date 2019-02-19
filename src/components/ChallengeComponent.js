@@ -4,6 +4,27 @@ import { Label, Row, Col,
 	ButtonGroup, Button, Badge, ButtonToolbar} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Form, Control } from 'react-redux-form';
+import Loading from './LoadingComponent';
+
+function ChallengeHeader({tasks,randomTasks}) {
+	if (tasks.isLoading || tasks.errMess) {
+		return <div></div>
+	} else {
+		return(
+			<React.Fragment>
+					<div className="position-absolute mt-2">
+						<h2 >Your Challenge </h2>
+						<p className="m-1"><strong className="header-text-sub"> One task is selected based on your preference:</strong><br/>
+							It is time to challenge yourself with the Task No. {randomTasks.id} proposed by {randomTasks.author}.<br/>
+							Discover more tasks in the <Link to="/library" className="highligt-text unstyled-link" >「Library」</Link>.<br/>
+							Click the <span className="highligt-text">「Reset button」</span> to clear all settings and go back to the Task Generator.<br/>
+							Would like another tasks? Click <span className="highligt-text">「<span className="fa fa-random fa-sm text-secondary"></span>」</span>to get another random tasks. 
+						</p>
+					</div>
+			</React.Fragment>
+		);
+	}
+}
 
 function RenderTaskContainer({randomTasks}){
 	const today = new Date;
@@ -46,11 +67,11 @@ function RenderTaskContainer({randomTasks}){
 		}
 }
 
-function TaskBody ({tasks,preferenceForm,randomTasks,handleReset}){
+function TaskBody ({tasks,preferenceForm,randomTasks,handleReset,newTasks}){
 	if (tasks.isLoading) {
 		return (
 			<div className="container">
-				fetching informations ...
+				<Loading />
 			</div>
 		);
 	}
@@ -67,9 +88,12 @@ function TaskBody ({tasks,preferenceForm,randomTasks,handleReset}){
 		return(
 			<div className="container mt-3">
 				<Row className="justify-content-center">
-					<div className="col-12 col-md-10">
+					<div className="col-12 col-lg-10">
 						<Card className="p-2 m-3">
-							<h5 className="align-self-center">CHALLENGE FOR TODAY</h5>
+							<h5 className="align-self-center position-relative">CHALLENGE FOR TODAY</h5>
+							<div className="d-flex justify-content-center">
+								<i className="fa fa-random fa-lg text-secondary btn" onClick={()=>{newTasks()}}></i>
+							</div>
 							<hr className="mt-1" />
 							<CardBody className="pt-0">
 								<Row className="list-container">
@@ -105,6 +129,7 @@ export default class Challenge extends Component {
 	constructor(props){
 		super(props);
 		this.handleReset=this.handleReset.bind(this);
+		this.newTasks=this.newTasks.bind(this);
 		this.state = {
 			randomTasks: [null]
 		}
@@ -116,6 +141,11 @@ export default class Challenge extends Component {
 	}
 
 	componentDidMount(){
+		this.newTasks();
+
+	}
+
+	newTasks(){
 		const remaningTasks = this.props.tasks.tasks.filter((task)=> {
 			let arr1 = this.props.preferenceForm.taskExclude.concat(task.category);
 			let set1 = new Set(arr1);
@@ -126,7 +156,7 @@ export default class Challenge extends Component {
 			return Math.floor(Math.random() * Math.floor(max));
 		}
 
-		const SelectedTasks = this.props.tasks.tasks[getRandomInt(remaningTasks.length)];
+		const SelectedTasks = remaningTasks[getRandomInt(remaningTasks.length)];
 		
 		this.setState({
 			randomTasks: SelectedTasks
@@ -137,10 +167,16 @@ export default class Challenge extends Component {
 	render() {
 		return(
 			<>
-				<TaskBody tasks={this.props.tasks} 
+			<div className="container position-relative ">
+				<ChallengeHeader tasks={this.props.tasks} randomTasks={this.state.randomTasks}/>
+				<div className="challenge-container align-items-center d-flex">
+					<TaskBody tasks={this.props.tasks} 
 					preferenceForm={this.props.preferenceForm} 
 					randomTasks={this.state.randomTasks}
-					handleReset={this.handleReset} />
+					handleReset={this.handleReset}
+					newTasks={this.newTasks} />
+				</div>
+			</div>
 			</>
 		);
 	}

@@ -4,6 +4,25 @@ import { Label, Row, Col,
 	ButtonGroup, Button, Badge, ButtonToolbar} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Form, Control } from 'react-redux-form';
+import Loading from './LoadingComponent';
+
+function ListSampleHeader({tasks}) {
+	if (tasks.isLoading || tasks.errMess) {
+		return <div></div>
+	} else {
+		return(
+			<React.Fragment>
+					<div className="position-absolute mt-2">
+						<h2 >List Setting </h2>
+						<p className="m-1"><strong className="header-text-sub"> Customize your to-do list:</strong><br/>
+							Passed days are labeled with <span className="highligt-text">「NOT AVALIABLE」</span>.<br/>
+							Click to toggle the dates your would like to <span className="highligt-text">「include」</span> or <span className="highligt-text">「exclude」</span> .<br/> 
+						</p>
+					</div>
+			</React.Fragment>
+		);
+	}
+}
 
 function RenderTaskContainer({listSampleForm,toggleSelect}){
 	if (listSampleForm.commingWeek) {
@@ -19,19 +38,23 @@ function RenderTaskContainer({listSampleForm,toggleSelect}){
 				var dateNotAvaliable = true;
 				var buttonColor = "secondary";
 			} else if (container.customSelect) {
-				var note = 'CLICK TO EXCLUDE THIS DATE';
+				var note = 'CLICK TO EXCLUDE';
 				var dateNotAvaliable = false;
 				var buttonColor = "warning";
 			} else {
-				var note = 'CLICK TO INCLUDE THIS DATE';
+				var note = 'CLICK TO INCLUDE';
 				var dateNotAvaliable = false;
 				var buttonColor = "secondary";
 			}
 			return (
-				<div className="task-container card col-12 col-sm-6" key={index} >
-					<Row><div className="mr-auto ml-2">{container.date}</div><div className="ml-auto mr-2">{container.abb.toUpperCase()}</div></Row>
-					<hr className="mt-0" />
-					<Button type="button" color={buttonColor} className="text-center" disabled={dateNotAvaliable} onClick={()=>{toggleSelect(modelName+index+'].customSelect')}}>{note}</Button>
+				<div className="col-12 col-md-6 p-1 flexbox" key={index}>
+					<div className="task-container card w-100 p-1" >
+						<div className="d-flex">
+							<div className="mr-auto ml-2">{container.date}</div><div className="ml-auto mr-2">{container.abb.toUpperCase()}</div>
+						</div>
+						<hr className="mt-0" />
+						<Button type="button" color={buttonColor} className="text-center mr-2 ml-2" disabled={dateNotAvaliable} onClick={()=>{toggleSelect(modelName+index+'].customSelect')}}>{note}</Button>
+					</div>
 				</div>
 			);
 		});
@@ -45,7 +68,7 @@ function ListSample ({tasks,preferenceForm,listSampleForm,toggleSelect}){
 	if (tasks.isLoading) {
 		return (
 			<div className="container">
-				fetching informations ...
+				<Loading />
 			</div>
 		);
 	}
@@ -62,9 +85,9 @@ function ListSample ({tasks,preferenceForm,listSampleForm,toggleSelect}){
 		return(
 			<div className="container mt-3">
 				<Row className="justify-content-center">
-					<div className="col-12 col-md-10">
+					<div className="col-12 col-lg-10">
 						<Card className="p-2 m-3">
-							<h5 className="align-self-center">List customizing</h5>
+							<h5 className="align-self-center">LIST CUSTOMIZING</h5>
 							<hr className="mt-1" />
 							<CardBody className="pt-0">
 								<Form model="listSampleForm">
@@ -119,12 +142,17 @@ export default class TodoListSample extends Component {
 	render() {
 		
 		return(
-		<>
-			<ListSample tasks={this.props.tasks} 
-				preferenceForm={this.props.preferenceForm} 
-				listSampleForm={this.props.listSampleForm}
-				toggleSelect={this.props.toggleSelect} />
-		</>
+			<>
+			<div className="container position-relative ">
+				<ListSampleHeader tasks={this.props.tasks} />
+				<div className="listSample-container align-items-center d-flex">
+					<ListSample tasks={this.props.tasks} 
+						preferenceForm={this.props.preferenceForm} 
+						listSampleForm={this.props.listSampleForm}
+						toggleSelect={this.props.toggleSelect} />
+				</div>
+			</div>
+			</>
 		);
 	}
 }

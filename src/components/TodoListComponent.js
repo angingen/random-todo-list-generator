@@ -4,6 +4,30 @@ import { Label, Row, Col,
 	ButtonGroup, Button, Badge, ButtonToolbar} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Form, Control } from 'react-redux-form';
+import Loading from './LoadingComponent';
+
+function ListHeader({tasks,randomTasks}) {
+	if (tasks.isLoading || tasks.errMess) {
+		return <div></div>
+	} else {
+		const totalTime = randomTasks.reduce((pre=0,cur)=> cur? +cur.time+pre:pre);
+		return( 
+			<React.Fragment>
+					<div className="position-absolute mt-2">
+						<h2 >Random To-do List </h2>
+						<p className="m-1"><strong className="header-text-sub"> A list is generated based on your preference:</strong><br/>
+							It is time to challenge yourself with this to-do list!{' '} 
+							{randomTasks.filter((task)=>task).length}&nbsp;{randomTasks.filter((task)=>task).length>1? 'tasks are ':'task is '} 
+							selected for you and will take in&nbsp;total {totalTime}&nbsp;{totalTime>1? 'hours':'hour'}.<br/> 
+							Discover more tasks in the <Link to="/library" className="highligt-text unstyled-link" >「Library」</Link>.<br/>
+							Click the <span className="highligt-text">「Reset button」</span> to clear all settings and go back to the Task Generator.<br/>
+							Would like another tasks? Click <span className="highligt-text">「<span className="fa fa-random fa-sm text-secondary"></span>」</span>to get another to-do list. 
+						</p>
+					</div>
+			</React.Fragment>
+		);
+	}
+}
 
 function RenderTaskContainer({listSampleForm,randomTasks}){
 	if (listSampleForm.commingWeek) {
@@ -15,14 +39,14 @@ function RenderTaskContainer({listSampleForm,randomTasks}){
 	const taskContainer = taskContainerUsed.map((container,index) => {
 			if (!randomTasks[index]){
 				return (
-					<div className="col-12 col-sm-6 p-1 flexbox" key={index}>
+					<div className="col-12 col-md-6 p-1 flexbox" key={index}>
 						<div className={ container.customSelect? "task-container-todolist card taskCard":"task-container-todolist card pastday taskCard" } >
 							<div className="d-flex">
 								<div className="mr-auto ml-2">{container.date}</div><div className="ml-auto mr-2">{container.abb.toUpperCase()}</div>
 							</div>
 							<hr className="mt-1" />
-							<CardBody className="pl-2 pr-2 pt-0">
-								<p>no task for today</p>
+							<CardBody className="pl-2 pr-2 pt-0 pb-0">
+								<p></p>
 							</CardBody>
 						</div>
 					</div>
@@ -30,13 +54,13 @@ function RenderTaskContainer({listSampleForm,randomTasks}){
 
 			} else {
 				return (
-					<div className="col-12 col-sm-6 p-1 flexbox" key={index}>
+					<div className="col-12 col-md-6 p-1 flexbox" key={index}>
 						<div className={ container.customSelect? "task-container-todolist card taskCard":"task-container-todolist card pastday taskCard" } >
 							<div className="d-flex">
 								<div className="mr-auto ml-2">{container.date}</div><div className="ml-auto mr-2">{container.abb.toUpperCase()}</div>
 							</div>
 							<hr className="mt-1" />
-							<CardBody className="pl-2 pr-2 pt-0">
+							<CardBody className="pl-2 pr-2 pt-0 pb-0">
 								<p>{randomTasks[index].name}</p>
 								<p>{randomTasks[index].description}</p>
 							</CardBody>
@@ -51,11 +75,11 @@ function RenderTaskContainer({listSampleForm,randomTasks}){
 	)
 }
 
-function ListBody ({tasks,preferenceForm,listSampleForm,randomTasks,handleReset}){
+function ListBody ({tasks,preferenceForm,listSampleForm,randomTasks,handleReset,newTasks}){
 	if (tasks.isLoading) {
 		return (
 			<div className="container">
-				fetching informations ...
+				<Loading />
 			</div>
 		);
 	}
@@ -72,9 +96,12 @@ function ListBody ({tasks,preferenceForm,listSampleForm,randomTasks,handleReset}
 		return(
 			<div className="container mt-3">
 				<Row className="justify-content-center">
-					<div className="col-12 col-md-10">
+					<div className="col-12 col-lg-10">
 						<Card className="p-2 m-3">
-							<h5 className="align-self-center">To-do List</h5>
+							<h5 className="align-self-center">TO-DO LIST</h5>
+							<div className="d-flex justify-content-center">
+								<i className="fa fa-random fa-lg text-secondary btn" onClick={()=>{newTasks()}}></i>
+							</div>
 							<hr className="mt-1" />
 							<CardBody className="pt-0">
 								<Row className="list-container">
@@ -112,6 +139,7 @@ export default class TodoList extends Component {
 	constructor(props){
 		super(props);
 		this.handleReset=this.handleReset.bind(this);
+		this.newTasks=this.newTasks.bind(this);
 		this.state = {
 			randomTasks: new Array(7).fill(null)
 		}
@@ -123,11 +151,19 @@ export default class TodoList extends Component {
 	}
 
 	componentDidMount(){
+		this.newTasks();
+
+	}
+
+	newTasks(){
 		const remaningTasks = this.props.tasks.tasks.filter((task)=> {
 			let arr1 = this.props.preferenceForm.taskExclude.concat(task.category);
 			let set1 = new Set(arr1);
+			console.log(arr1.length == set1.size);
 			return (arr1.length == set1.size && task.time<=this.props.preferenceForm.time)
 		});
+
+		console.log(remaningTasks);
 
 		function getRandomInt(max){
 			return Math.floor(Math.random() * Math.floor(max));
@@ -141,7 +177,7 @@ export default class TodoList extends Component {
 
 		const SelectedTasks = taskContainerUsed.map((task)=>{
 			if (task.customSelect) {
-				return this.props.tasks.tasks[getRandomInt(remaningTasks.length)];
+				return remaningTasks[getRandomInt(remaningTasks.length)];
 			} else {
 				return null;
 			}
@@ -156,11 +192,17 @@ export default class TodoList extends Component {
 	render() {
 		return(
 			<>
-				<ListBody tasks={this.props.tasks} 
-					preferenceForm={this.props.preferenceForm} 
-					listSampleForm={this.props.listSampleForm} 
-					randomTasks={this.state.randomTasks}
-					handleReset={this.handleReset} />
+				<div className="container position-relative ">
+					<ListHeader tasks={this.props.tasks} randomTasks={this.state.randomTasks}/>
+					<div className="list-page-container d-flex">
+						<ListBody tasks={this.props.tasks} 
+							preferenceForm={this.props.preferenceForm} 
+							listSampleForm={this.props.listSampleForm} 
+							randomTasks={this.state.randomTasks}
+							handleReset={this.handleReset}
+							newTasks={this.newTasks} />
+					</div>
+				</div>
 			</>
 		);
 	}

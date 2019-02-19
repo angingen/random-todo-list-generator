@@ -1,3 +1,10 @@
+$card-hv-ch: #B7E1E4;
+$card-hv-ls: #B7E1E4;
+$pale-gray: #EEEBE7;
+$text-hl:#B7E1E4;
+$text-df:#212529;
+
+
 /*stiky footer*/
 html, body {
   height: 100%;
@@ -72,37 +79,85 @@ html, body {
 .title-alignment {
   align-self: flex-start;
 }
+.generator-page-container{
+  min-height: 600px;
+  .generator-container {
+    height: 100%;
+    padding-top: 46px;
+    .row {
+      margin: 0px;
+    }
+    
+      a, a:hover{
+        text-decoration: none;
+        color:$text-df;
+      }
 
-.generator-container {
-  height: 100%;
-  padding-top: 46px;
-  .row {
-    margin: 0px;
-  }
-  
-    a, a:hover{
-      text-decoration: none;
-      color:black;
+    .generator-card {
+      margin: 10px;
+      max-height: 300px;
+      min-height: 250px;
+      border-radius: 10px;
+
+      .card-body {
+        display: flex;
+        justify-content: space-between;
+          
+        img {
+          align-self: flex-end;
+        }
+      }
     }
 
-  .generator-card {
-    height: 300px;
-    border-radius: 10px;
-    .card-body {
-      display: flex;
-      justify-content: space-between;
-      h5 {
-        text-align: center;
-      }
-      img {
-        align-self: flex-end;
-      }
+    .generator-card:hover, .tags-list:hover {
+      cursor: pointer;
     }
   }
 }
 
-.generator-card:hover, .tags-list:hover {
-  cursor: pointer;
+.header-text-sub {
+  font-size: 1.25rem;
+  text-align: center;
+}
+.highligt-text{
+  background-color: $text-hl;
+}
+/*preference Layout*/
+.preference-container{
+  height: 100%;
+  padding-top: 100px;
+  min-height: 700px;
+}
+/*challenge layout*/
+.challenge-container{
+  height: 100%;
+  padding-top: 180px;
+  min-height: 600px;
+}
+
+.unstyled-link {
+  text-decoration: none;
+  color: $text-df;
+}
+
+.unstyled-link:hover{
+  text-decoration: none;
+}
+
+/*listSample layout*/
+.listSample-container{
+  min-height: 800px;
+  padding-top: 120px;
+}
+
+.list-page-container{
+  min-height: 1200px;
+  padding-top: 200px;
+}
+
+
+.header-text {
+  font-size: 1.25rem;
 }
 
 #includa-area{
@@ -116,7 +171,7 @@ html, body {
   width: 100%;
   overflow: auto;
   .badge{
-    background-color: gray;
+    background-color: $pale-gray;
   }
 }
 
@@ -124,7 +179,7 @@ html, body {
   width: 100%;
 }
 
-#remainingTasksButton{
+#remainingTasksButton-md{
   min-width: 190px;
   min-height: 45px;
 
@@ -134,11 +189,11 @@ html, body {
   }
 }
 
-#remainingTasksButton:hover, #resetButton:hover {
+#remainingTasksButton-md:hover,#remainingTasksButton-sm:hover, #resetButton:hover {
   font-weight: bold;
 }
 
-#resetButton{
+#resetButton, #remainingTasksButton-sm {
   text-align: center;
   margin-left: 15px;
   min-width: 80px;
@@ -146,15 +201,69 @@ html, body {
 }
 
 @media (max-width: 767px) {
-  #remainingTasksButton{
-  width: 100px;
-  min-height: 45px;
+  #remainingTasksButton-md{
+    width: 100px;
+    min-height: 45px;
 
-  #remainingTasks {
-    min-width: 10px;
-    text-align: center;
+    #remainingTasks {
+      min-width: 10px;
+      text-align: center;
+    }
+  }
+  .generator-page-container{
+    min-height: 900px;
+  }
+  .preference-container{
+    min-height: 1000px;
+    padding-top: 150px;
+  }
+  .challenge-container{
+    min-height: 800px;
+    padding-top: 100px;
+  }
+
+  .listSample-container{
+    min-height: 1200px;
+    padding-top: 150px;
+  }
+  .list-page-container{
+    padding-top: 220px;
   }
 }
+
+@media (max-width: 567px) {
+  .list-page-container{
+    padding-top: 250px;
+  }
+  .task-container-todolist {
+      p, div{
+        font-size: 0.8em;
+      }
+  }
+  .header-text-sub{
+    font-size: 1.15rem;
+  }
+
+  .position-absolute p{
+    font-size: 0.9rem;
+  }
+
+
+  h2{
+    font-size: 1.85rem;
+  }
+  .taskCard {
+    h5{
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    p {
+      font-size: 0.85rem;
+    }
+    .card-subtitle {
+      font-size: 0.75rem;
+    }
+  }
 
 }
 
@@ -164,10 +273,38 @@ html, body {
 }
 
 .pastday {
-  background-color: gray;
+  background-color: $pale-gray;
 }
 
 .task-container-todolist {
-  min-height: 200px;
   max-height: 300px;
+  overflow: auto;
+  p:nth-child(1){
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  hr{
+    margin-bottom: 0px;
+  }
 }
+
+.loading-container {
+
+}
+
+.hvr-fade {
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
+  background-color: $card-hv-ch;
+  color: white;
+}
+

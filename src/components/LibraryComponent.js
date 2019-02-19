@@ -6,6 +6,7 @@ import { Badge, Row, Col,
 	Modal, ModalHeader, ModalBody, Label,
 	Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
+import Loading from './LoadingComponent';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -160,7 +161,7 @@ class RenderLibHeader extends Component {
 									/>
 									<Errors
 										className="text-danger" 
-										model=".taskDescript" 
+										model=".email" 
 										show={{touched: true, focus: false}}
 										messages={{
 											validEmail: 'Please enter a valid email address'
@@ -232,7 +233,9 @@ function TagsList({tags, tagSelector,tagSelected}) {
 		return (
 			<div className="container">
 				fetching tags informations ...
-			</div>
+				<Loading />
+	        </div>
+
 		);
 	}
 	else if (tags.errMess) {
@@ -314,6 +317,7 @@ function TaskCards({tasks,tasksSelected}) {
 		return (
 			<div className="container">
 				fetching tasks informations ...
+				<Loading />
 			</div>
 		);
 	}
@@ -331,6 +335,41 @@ function TaskCards({tasks,tasksSelected}) {
 			<React.Fragment>
 				<RenderTasks tasks={tasksSelected} />
 			</React.Fragment>
+		)
+	}
+}
+
+function PageNav({tasks,currentPage,totoalPage,pagePrev,pageNext,changePage}) {
+	const pageNavNum = [...Array(totoalPage)].map((e,i)=>
+				<PaginationItem key={i} active={currentPage==i+1} onClick={()=>{changePage(i)}}>
+		          	<div className="page-link" aria-label="Previous">
+				        <span aria-hidden="true">{i+1}</span>
+				  	</div>
+		        </PaginationItem>
+		)
+	if (!tasks.isLoading && !tasks.errMess && totoalPage>1 ) {
+		return(
+			<div className="row">
+				<div className="m-auto">
+					<Pagination size="sm" aria-label="Page navigation">
+				        <PaginationItem disabled={currentPage==1} onClick={pagePrev}>
+				          <div className="page-link" aria-label="Previous">
+				          	<span aria-hidden="true">«</span>
+				          </div>
+				        </PaginationItem>
+				        	{pageNavNum}
+				        <PaginationItem disabled={currentPage==totoalPage} onClick={pageNext}>
+				          <div className="page-link" aria-label="Previous">
+				          	<span aria-hidden="true">»</span>
+				          </div>
+				        </PaginationItem>
+				      </Pagination>
+				</div>
+			</div>
+		);
+	} else {
+		return(
+			<div></div>
 		)
 	}
 }
@@ -371,6 +410,7 @@ export default class Library extends Component {
 				totoalPage: Math.ceil(this.props.tasks.tasks.length/this.state.tasksPerPage)
 			});
 		}
+		this.tagSelector('all');
 	}
 
 	pageNext() {
@@ -404,9 +444,13 @@ export default class Library extends Component {
 		console.log('render function envoked');
 		return (
 			<div className="container">
-				<RenderLibHeader postProposal={this.props.postProposal} resetProposalForm={this.props.resetProposalForm}/>
-				<TagsList tags={this.props.tags} tagSelector={this.tagSelector} tagSelected={this.state.tagSelected}/>
-				<TaskCards tasks={this.props.tasks} tasksSelected = {this.state.tasksInCurrentPage}/>
+				<RenderLibHeader postProposal={this.props.postProposal} 
+					resetProposalForm={this.props.resetProposalForm} />
+				<TagsList tags={this.props.tags} 	
+					tagSelector={this.tagSelector} 
+					tagSelected={this.state.tagSelected}/>
+				<TaskCards tasks={this.props.tasks} 
+					tasksSelected = {this.state.tasksInCurrentPage}/>
 				<PageNav tasks={this.props.tasks} 
 					currentPage={this.state.currentPage} 
 					totoalPage={this.state.totoalPage}
@@ -418,37 +462,3 @@ export default class Library extends Component {
 	}
 }
 
-function PageNav({tasks,currentPage,totoalPage,pagePrev,pageNext,changePage}) {
-	const pageNavNum = [...Array(totoalPage)].map((e,i)=>
-				<PaginationItem key={i} active={currentPage==i+1} onClick={()=>{changePage(i)}}>
-		          	<div className="page-link" aria-label="Previous">
-				        <span aria-hidden="true">{i+1}</span>
-				  	</div>
-		        </PaginationItem>
-		)
-	if (!tasks.isLoading && !tasks.errMess && totoalPage>1 ) {
-		return(
-			<div className="row">
-				<div className="m-auto">
-					<Pagination aria-label="Page navigation">
-				        <PaginationItem disabled={currentPage==1} onClick={pagePrev}>
-				          <div className="page-link" aria-label="Previous">
-				          	<span aria-hidden="true">«</span>
-				          </div>
-				        </PaginationItem>
-				        	{pageNavNum}
-				        <PaginationItem disabled={currentPage==totoalPage} onClick={pageNext}>
-				          <div className="page-link" aria-label="Previous">
-				          	<span aria-hidden="true">»</span>
-				          </div>
-				        </PaginationItem>
-				      </Pagination>
-				</div>
-			</div>
-		);
-	} else {
-		return(
-			<div></div>
-		)
-	}
-}
