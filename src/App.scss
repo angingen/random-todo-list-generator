@@ -443,3 +443,18 @@ html, body {
   color: $cs-purple-dk;
 }
 
+div#section-to-print {
+  position: relative;
+  .page-nav{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+  }
+  .tasks-card-container{
+    margin-bottom: 80px;
+  }
+}
+
+
+

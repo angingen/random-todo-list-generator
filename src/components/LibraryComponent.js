@@ -302,7 +302,7 @@ function RenderTasks({tasks}) {
 		})
 
 		return (
-			<Row>
+			<Row className="tasks-card-container">
 				{task}
 			</Row>
 		);
@@ -352,7 +352,7 @@ function PageNav({tasks,currentPage,totoalPage,pagePrev,pageNext,changePage}) {
 		)
 	if (!tasks.isLoading && !tasks.errMess && totoalPage>1 ) {
 		return(
-			<div className="row">
+			<div className="row mt-3 page-nav">
 				<div className="m-auto">
 					<Pagination size="sm" aria-label="Page navigation">
 				        <PaginationItem disabled={currentPage==1} onClick={pagePrev}>
