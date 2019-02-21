@@ -289,7 +289,7 @@ function RenderTasks({tasks}) {
 				<div key={taskItem.id} className="col-12 col-md-6 col-lg-4 mt-3 mb-3 flexbox">
 					<Card className="taskCard">
 						<CardBody>
-							<h5 className="flexbox"><div>{taskItem.name}</div><Badge color="danger" className="ml-auto">{taskItem.time}{taskItem.unit}</Badge></h5>
+							<h5 className="flexbox"><div>{taskItem.name}</div><Badge color="danger" className="ml-auto">{taskItem.time}{taskItem.time>1?'hrs':'hr'}</Badge></h5>
 							<CardText>{taskItem.description}</CardText>
 							<CardSubtitle><TaskAuthor /></CardSubtitle>
 							<div className="space-filler"></div>
@@ -399,6 +399,7 @@ export default class Library extends Component {
 	tagSelector(tag) {
 		this.setState({
 			tagSelected: tag,
+			currentPage:1,
 			tasksSelected: this.props.tasks.tasks.filter(task => task.category.includes(tag)),
 			tasksInCurrentPage: this.props.tasks.tasks.filter(task => task.category.includes(tag)).slice(0,this.state.tasksPerPage),
 			totoalPage: Math.ceil(this.props.tasks.tasks.filter(task => task.category.includes(tag)).length/this.state.tasksPerPage)

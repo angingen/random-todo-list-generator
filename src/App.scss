@@ -110,6 +110,13 @@ html, body {
 .taskCard {
   align-items: stretch;
   flex: 1 1 auto;
+  h5 {
+    font-size: 1rem;
+  }
+
+  p{
+    font-size: 0.9rem;
+  }
 }
 
 .card-body {
@@ -422,5 +429,17 @@ html, body {
 
 .spacefiller-img{
   width: 100%;
+}
+
+.pagination .active .page-link{
+  background-color: $cs-pink;
+  border-color: $cs-pink;
+  span {
+    color: #fff;
+  }
+}
+
+.pagination .page-link{
+  color: $cs-purple-dk;
 }
 
