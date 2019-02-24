@@ -49,11 +49,11 @@ function RenderTaskContainer({listSampleForm,toggleSelect}){
 			return (
 				<div className="col-12 col-md-6 p-1 flexbox" key={index}>
 					<div className="task-container card w-100 p-1" >
-						<div className="d-flex">
+						<div className="d-flex task-container-sample">
 							<div className="mr-auto ml-2">{container.date}</div><div className="ml-auto mr-2">{container.abb.toUpperCase()}</div>
 						</div>
 						<hr className="mt-0" />
-						<Button type="button" color={buttonColor} className="text-center mr-2 ml-2" disabled={dateNotAvaliable} onClick={()=>{toggleSelect(modelName+index+'].customSelect')}}>{note}</Button>
+						<Button type="button" color={buttonColor} className="text-center mr-2 ml-2 task-sample-button" disabled={dateNotAvaliable} onClick={()=>{toggleSelect(modelName+index+'].customSelect')}}>{note}</Button>
 					</div>
 				</div>
 			);
@@ -120,7 +120,7 @@ function ListSample ({tasks,preferenceForm,listSampleForm,toggleSelect}){
 						                </div>
 						                <div className="d-flex col-8">
 											<Link id="nextButton" to="/generator/listpreference/listsample/todolist" className="ml-auto btn btn-outline-danger">
-							                    Generate my list!
+							                    Next
 							                </Link>
 						                </div>
 							        </Row>

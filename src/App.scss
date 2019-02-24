@@ -322,11 +322,16 @@ html, body {
   .list-page-container{
     padding-top: 250px;
   }
-  .task-container-todolist {
+  .task-container-todolist, .task-container-sample {
       p, div{
         font-size: 0.8em;
       }
   }
+  .task-sample-button {
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
   .header-text-sub{
     font-size: 1.15rem;
   }
@@ -456,5 +461,8 @@ div#section-to-print {
   }
 }
 
+.text-cs-purple {
+  color: $cs-purple-dk;
+}
 
 

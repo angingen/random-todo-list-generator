@@ -105,7 +105,7 @@ function ListBody ({tasks,preferenceForm,listSampleForm,randomTasks,handleReset,
 						<Card className="p-2 m-3">
 							<h5 className="align-self-center">TO-DO LIST</h5>
 							<div className="d-flex justify-content-center">
-								<i className="fa fa-random fa-lg text-secondary btn" onClick={()=>{newTasks()}}></i>
+								<i className="fa fa-random fa-lg text-cs-purple btn" onClick={()=>{newTasks()}}></i>
 							</div>
 							<hr className="mt-1" />
 							<CardBody className="pt-0">
