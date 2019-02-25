@@ -2,7 +2,7 @@
 
 Feeling every day is the same? Do not have enough time to plan for your week? Or simply run out of idea of what to do in your free time? **The goal of this project is to design an easy to use to-do list generator that could help people to create a plan with random tasks in a click.**
 
-`The website can be accessed [here](https://randomtodolistgenerator.herokuapp.com/).`
+Check out the website [here](https://randomtodolistgenerator.herokuapp.com/).
 
 ### This project can:
 1) provide a random to-do list with tasks close to the users' preference;
@@ -19,4 +19,4 @@ Set the preference of your random tasks, including the task categories and lengt
 ### Taks Library:
 You can view tasks and their descriptions based on the chosen category on the Task Library. Feel free to propose your own task by clicking the `+` button.
 
-**More tasks will be added to the library gradually.**
+**`More tasks will be added to the library gradually.`**
