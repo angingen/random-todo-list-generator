@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Control, Errors } from 'react-redux-form';
+import { Form, Control } from 'react-redux-form';
 import { Label, Row, Col,
-	Card, CardBody, CardTitle,
-	ButtonGroup, Button, Badge, ButtonToolbar} from 'reactstrap';
+	Card, CardBody,
+	ButtonGroup, Badge, ButtonToolbar} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Loading from './LoadingComponent';
 
@@ -11,18 +11,16 @@ function PreferenceHeader({pathname,tags}) {
 		return <div></div>
 	} else {
 		var nextStep="";
-		pathname == '/generator/listpreference'? nextStep = 'move to the List Setting.': nextStep = 'generate your task!';
+		pathname === '/generator/listpreference'? nextStep = 'move to the List Setting.': nextStep = 'generate your task!';
 		return(
-			<React.Fragment>
-					<div className="position-absolute mt-2">
-						<h2 >Task Preference </h2>
-						<p className="m-1"><strong className="header-text-sub"> Customize your tasks:</strong><br/>
-							Click to toggle the tasks categories you would like to <span className="highligt-text">「include」</span> or <span className="highligt-text">「exclude」</span>.<br/>
-							Set a <span className="highligt-text">「maximum allowable time」</span> for your tasks by adjusting the slider.<br/>
-							Click the <span className="highligt-text d-none d-md-inline">「Remaining Task button」</span><span className="highligt-text d-md-none d-sm-inline">「Next」</span> to {nextStep}
-						</p>
-					</div>
-			</React.Fragment>
+			<div className="position-absolute mt-2">
+				<h2 >Task Preference </h2>
+				<p className="m-1"><strong className="header-text-sub"> Customize your tasks:</strong><br/>
+					Click to toggle the tasks categories you would like to <span className="highligt-text">「include」</span> or <span className="highligt-text">「exclude」</span>.<br/>
+					Set a <span className="highligt-text">「maximum allowable time」</span> for your tasks by adjusting the slider.<br/>
+					Click the <span className="highligt-text d-none d-md-inline">「Remaining Task button」</span><span className="highligt-text d-md-none d-sm-inline">「Next」</span> to {nextStep}
+				</p>
+			</div>
 		);
 	}
 }	
@@ -75,22 +73,22 @@ function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,dis
 		const numberOfTasks = tasks.tasks.filter((task)=> {
 			let arr1 = preferenceForm.taskExclude.concat(task.category);
 			let set1 = new Set(arr1);
-			return (arr1.length == set1.size && task.time<=preferenceForm.time)
+			return (arr1.length === set1.size && task.time<=preferenceForm.time)
 		});
 
 		return(
 			<React.Fragment>
 				<Col className="d-flex align-items-end col-8">
 					<Link id="remainingTasksButton-md" 
-						to={pathname=="/generator/listpreference"? pathname + '/listsample':pathname + '/challenge'} 
+						to={pathname==="/generator/listpreference"? pathname + '/listsample':pathname + '/challenge'} 
 						className="ml-auto btn btn-outline-danger d-none d-md-block" 
 						onMouseEnter={mouseOverHandler}
 						onMouseLeave={mouseOutHandler}>
-							{displayTasksNumber =='none'? 'Next':'Remaining Tasks'}
+							{displayTasksNumber ==='none'? 'Next':'Remaining Tasks'}
 							<Badge style={{display:displayTasksNumber}} color="danger" id="remainingTasks" className="m-1 ml-2">{numberOfTasks.length}</Badge>
 					</Link>
 					<Link id="remainingTasksButton-sm" 
-						to={pathname=="/generator/listpreference"? pathname + '/listsample':pathname + '/challenge'} 
+						to={pathname==="/generator/listpreference"? pathname + '/listsample':pathname + '/challenge'} 
 						className="ml-auto btn btn-outline-danger d-sm-block d-md-none"> 
 							Next
 					</Link>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { baseURL } from '../shared/baseURL';
 import { Badge, Row, Col,
 	Button, ButtonGroup, ButtonToolbar,
-	Card, CardText, CardBody, CardTitle, CardSubtitle,
+	Card, CardText, CardBody, CardSubtitle,
 	Modal, ModalHeader, ModalBody, Label,
-	Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+	Pagination, PaginationItem } from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
 import Loading from './LoadingComponent';
 
@@ -36,7 +35,7 @@ class RenderLibHeader extends Component {
 	}
 
 	hoverDisplay() {
-		if (this.state.buttonDisplay.p == 'none') {
+		if (this.state.buttonDisplay.p === 'none') {
 			this.setState({
 				buttonDisplay: {span:'none',p:'block'}
 			})
@@ -44,7 +43,7 @@ class RenderLibHeader extends Component {
 	}
 
 	unhoverDisplay() {
-		if (this.state.buttonDisplay.span == 'none') {
+		if (this.state.buttonDisplay.span === 'none') {
 			this.setState({
 				buttonDisplay: {span:'block',p:'none'}
 			})
@@ -209,7 +208,7 @@ function RenderTags({tags, tagSelector, tagSelected}) {
 			return (
 				
 				<ButtonGroup key={tagItem.id}>
-					<Badge color={tagItem.name==tagSelected? "danger":"warning"} className="m-1 tags tags-list" onClick={() => tagSelector(tagItem.name)} pill>{tagItem.name}</Badge>
+					<Badge color={tagItem.name===tagSelected? "danger":"warning"} className="m-1 tags tags-list" onClick={() => tagSelector(tagItem.name)} pill>{tagItem.name}</Badge>
 				</ButtonGroup>
 				
 			)
@@ -276,7 +275,7 @@ function RenderTasks({tasks}) {
 			}
 
 			const cardTags = taskItem.category.map((tag) => {
-				if (tag != "all"){
+				if (tag !== "all"){
 					return (
 						<ButtonGroup key={taskItem.category.indexOf(tag)}>
 							<Badge color="info" className="m-1 tags" pill>{tag}</Badge>
@@ -344,7 +343,7 @@ function TaskCards({tasks,tasksSelected}) {
 
 function PageNav({tasks,currentPage,totoalPage,pagePrev,pageNext,changePage}) {
 	const pageNavNum = [...Array(totoalPage)].map((e,i)=>
-				<PaginationItem key={i} active={currentPage==i+1} onClick={()=>{changePage(i)}}>
+				<PaginationItem key={i} active={currentPage===i+1} onClick={()=>{changePage(i)}}>
 		          	<div className="page-link" aria-label="Previous">
 				        <span aria-hidden="true">{i+1}</span>
 				  	</div>
@@ -355,13 +354,13 @@ function PageNav({tasks,currentPage,totoalPage,pagePrev,pageNext,changePage}) {
 			<div className="row mt-3 page-nav">
 				<div className="m-auto">
 					<Pagination size="sm" aria-label="Page navigation">
-				        <PaginationItem disabled={currentPage==1} onClick={pagePrev}>
+				        <PaginationItem disabled={currentPage===1} onClick={pagePrev}>
 				          <div className="page-link" aria-label="Previous">
 				          	<span aria-hidden="true">«</span>
 				          </div>
 				        </PaginationItem>
 				        	{pageNavNum}
-				        <PaginationItem disabled={currentPage==totoalPage} onClick={pageNext}>
+				        <PaginationItem disabled={currentPage===totoalPage} onClick={pageNext}>
 				          <div className="page-link" aria-label="Previous">
 				          	<span aria-hidden="true">»</span>
 				          </div>
@@ -403,7 +402,7 @@ export default class Library extends Component {
 			tasksSelected: this.props.tasks.tasks.filter(task => task.category.includes(tag)),
 			tasksInCurrentPage: this.props.tasks.tasks.filter(task => task.category.includes(tag)).slice(0,this.state.tasksPerPage),
 			totoalPage: Math.ceil(this.props.tasks.tasks.filter(task => task.category.includes(tag)).length/this.state.tasksPerPage)
-		})
+		});
 	}
 
 	componentDidMount() {
@@ -418,22 +417,22 @@ export default class Library extends Component {
 	}
 
 	pageNext() {
-		if (this.state.currentPage!=this.state.totoalPage){
-			const pageNum = this.state.currentPage + 1
+		if (this.state.currentPage!==this.state.totoalPage){
+			const pageNum = this.state.currentPage + 1;
 			this.setState({
 				currentPage:pageNum,
 				tasksInCurrentPage: this.state.tasksSelected.slice(this.state.tasksPerPage*(pageNum-1),this.state.tasksPerPage*(pageNum))
-			})
+			});
 		}
 	}
 
 	pagePrev() {
-		if (this.state.currentPage!=1){
-			const pageNum = this.state.currentPage - 1
+		if (this.state.currentPage!==1){
+			const pageNum = this.state.currentPage - 1;
 			this.setState({
 				currentPage:pageNum,
 				tasksInCurrentPage: this.state.tasksSelected.slice(this.state.tasksPerPage*(pageNum-1),this.state.tasksPerPage*(pageNum))
-			})
+			});
 		}
 	}
 
@@ -441,7 +440,7 @@ export default class Library extends Component {
 		this.setState({
 			currentPage:pageNum+1,
 			tasksInCurrentPage: this.state.tasksSelected.slice(this.state.tasksPerPage*(pageNum),this.state.tasksPerPage*(pageNum+1))
-		})
+		});
 	}
 
 	render() {

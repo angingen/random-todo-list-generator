@@ -8,7 +8,6 @@ import Preference from './PreferenceComponent';
 import TodoListSample from './TodoListSampleComponent';
 import TodoList from './TodoListComponent';
 import Challenge from './ChallengeComponent';
-import Loading from './LoadingComponent';
 
 import { fetchTags, fetchTasks, postProposal } from '../redux/ActionCreator';
 import { connect } from 'react-redux';

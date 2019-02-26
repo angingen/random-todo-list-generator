@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Label, Row, Col,
-	Card, CardBody, CardTitle,
-	ButtonGroup, Button, Badge, ButtonToolbar} from 'reactstrap';
+import { Row, Card, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Form, Control } from 'react-redux-form';
 import Loading from './LoadingComponent';
 
 function ListHeader({tasks,randomTasks}) {
@@ -12,28 +9,27 @@ function ListHeader({tasks,randomTasks}) {
 	} else {
 		const totalTime = randomTasks.reduce((pre=0,cur)=> cur? +cur.time+pre:pre);
 		return( 
-			<React.Fragment>
-					<div className="position-absolute mt-2">
-						<h2 >Random To-do List </h2>
-						<p className="m-1"><strong className="header-text-sub"> A list is generated based on your preference:</strong><br/>
-							It is time to challenge yourself with this to-do list!{' '} 
-							{randomTasks.filter((task)=>task).length}&nbsp;{randomTasks.filter((task)=>task).length>1? 'tasks are ':'task is '} 
-							selected for you and will take in&nbsp;total {totalTime}&nbsp;{totalTime>1? 'hours':'hour'}.<br/> 
-							Discover more tasks in the <Link to="/library" className="highligt-text unstyled-link" >「Library」</Link>.<br/>
-							Click the <span className="highligt-text">「Reset button」</span> to clear all settings and go back to the Task Generator.<br/>
-							Would like another tasks? Click <span className="highligt-text">「<span className="fa fa-random fa-sm text-secondary"></span>」</span>to get another to-do list. 
-						</p>
-					</div>
-			</React.Fragment>
+			<div className="position-absolute mt-2">
+				<h2 >Random To-do List </h2>
+				<p className="m-1"><strong className="header-text-sub"> A list is generated based on your preference:</strong><br/>
+					It is time to challenge yourself with this to-do list!{' '} 
+					{randomTasks.filter((task)=>task).length}&nbsp;{randomTasks.filter((task)=>task).length>1? 'tasks are ':'task is '} 
+					selected for you and will take in&nbsp;total {totalTime}&nbsp;{totalTime>1? 'hours':'hour'}.<br/> 
+					Discover more tasks in the <Link to="/library" className="highligt-text unstyled-link" >「Library」</Link>.<br/>
+					Click the <span className="highligt-text">「Reset button」</span> to clear all settings and go back to the Task Generator.<br/>
+					Would like another tasks? Click <span className="highligt-text">「<span className="fa fa-random fa-sm text-secondary"></span>」</span>to get another to-do list. 
+				</p>
+			</div>
 		);
 	}
 }
 
 function RenderTaskContainer({listSampleForm,randomTasks}){
+	var taskContainerUsed = [];
 	if (listSampleForm.commingWeek) {
-		var taskContainerUsed = listSampleForm.taskContainerCommingWeek;
+		taskContainerUsed = listSampleForm.taskContainerCommingWeek;
 	} else {
-		var taskContainerUsed = listSampleForm.taskContainer;
+		taskContainerUsed = listSampleForm.taskContainer;
 	}
 
 	const taskContainer = taskContainerUsed.map((container,index) => {
@@ -164,8 +160,8 @@ export default class TodoList extends Component {
 		const remaningTasks = this.props.tasks.tasks.filter((task)=> {
 			let arr1 = this.props.preferenceForm.taskExclude.concat(task.category);
 			let set1 = new Set(arr1);
-			console.log(arr1.length == set1.size);
-			return (arr1.length == set1.size && task.time<=this.props.preferenceForm.time)
+			console.log(arr1.length === set1.size);
+			return (arr1.length === set1.size && task.time<=this.props.preferenceForm.time)
 		});
 
 		console.log(remaningTasks);
@@ -174,10 +170,11 @@ export default class TodoList extends Component {
 			return Math.floor(Math.random() * Math.floor(max));
 		}
 
+		var taskContainerUsed = [];
 		if (this.props.listSampleForm.commingWeek) {
-			var taskContainerUsed = this.props.listSampleForm.taskContainerCommingWeek;
+			taskContainerUsed = this.props.listSampleForm.taskContainerCommingWeek;
 		} else {
-			var taskContainerUsed = this.props.listSampleForm.taskContainer;
+			taskContainerUsed = this.props.listSampleForm.taskContainer;
 		}
 
 		const SelectedTasks = taskContainerUsed.map((task)=>{

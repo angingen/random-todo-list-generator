@@ -1,6 +1,6 @@
-const today = new Date;
+const today = new Date();
 var day = today.getDay();
-day==0? day=7:day=day;
+if (day === 0 ) day = 7;
 
 export const InitialListSample = {
 	commingWeek: false,

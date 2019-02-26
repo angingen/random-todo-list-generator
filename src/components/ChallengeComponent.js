@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Label, Row, Col,
-	Card, CardBody, CardTitle,
-	ButtonGroup, Button, Badge, ButtonToolbar} from 'reactstrap';
+import { Row, Card, CardBody} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Form, Control } from 'react-redux-form';
 import Loading from './LoadingComponent';
 
 function ChallengeHeader({tasks,randomTasks}) {
@@ -11,26 +8,24 @@ function ChallengeHeader({tasks,randomTasks}) {
 		return <div></div>
 	} else {
 		return(
-			<React.Fragment>
-					<div className="position-absolute mt-2">
-						<h2 >Your Challenge </h2>
-						<p className="m-1"><strong className="header-text-sub"> One task is selected based on your preference:</strong><br/>
-							It is time to challenge yourself with the Task No. {randomTasks.id} proposed by {randomTasks.author}.<br/>
-							Discover more tasks in the <Link to="/library" className="highligt-text unstyled-link" >「Library」</Link>.<br/>
-							Click the <span className="highligt-text">「Reset button」</span> to clear all settings and go back to the Task Generator.<br/>
-							Would like another tasks? Click <span className="highligt-text">「<span className="fa fa-random fa-sm text-secondary"></span>」</span>to get another random tasks. 
-						</p>
-					</div>
-			</React.Fragment>
+			<div className="position-absolute mt-2">
+				<h2 >Your Challenge </h2>
+				<p className="m-1"><strong className="header-text-sub"> One task is selected based on your preference:</strong><br/>
+					It is time to challenge yourself with the Task No. {randomTasks.id} proposed by {randomTasks.author}.<br/>
+					Discover more tasks in the <Link to="/library" className="highligt-text unstyled-link" >「Library」</Link>.<br/>
+					Click the <span className="highligt-text">「Reset button」</span> to clear all settings and go back to the Task Generator.<br/>
+					Would like another tasks? Click <span className="highligt-text">「<span className="fa fa-random fa-sm text-secondary"></span>」</span>to get another random tasks. 
+				</p>
+			</div>
 		);
 	}
 }
 
 function RenderTaskContainer({randomTasks}){
-	const today = new Date;
+	const today = new Date();
 	const day = today.getDay();
 	const week = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-		if (!randomTasks){
+		if (!randomTasks) {
 			return (
 				<div className="row d-flex">
 					<div className="col-12 p-1 flexbox">
@@ -149,7 +144,7 @@ export default class Challenge extends Component {
 		const remaningTasks = this.props.tasks.tasks.filter((task)=> {
 			let arr1 = this.props.preferenceForm.taskExclude.concat(task.category);
 			let set1 = new Set(arr1);
-			return (arr1.length == set1.size && task.time<=this.props.preferenceForm.time)
+			return (arr1.length === set1.size && task.time <= this.props.preferenceForm.time)
 		});
 
 		function getRandomInt(max){

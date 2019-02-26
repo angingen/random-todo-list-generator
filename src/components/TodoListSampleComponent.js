@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Label, Row, Col,
-	Card, CardBody, CardTitle,
-	ButtonGroup, Button, Badge, ButtonToolbar} from 'reactstrap';
+	Card, CardBody, Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Form, Control } from 'react-redux-form';
 import Loading from './LoadingComponent';
@@ -11,40 +10,43 @@ function ListSampleHeader({tasks}) {
 		return <div></div>
 	} else {
 		return(
-			<React.Fragment>
-					<div className="position-absolute mt-2">
-						<h2 >List Setting </h2>
-						<p className="m-1"><strong className="header-text-sub"> Customize your to-do list:</strong><br/>
-							Passed days are labeled with <span className="highligt-text">「NOT AVALIABLE」</span>.<br/>
-							Click to toggle the dates your would like to <span className="highligt-text">「include」</span> or <span className="highligt-text">「exclude」</span> .<br/> 
-						</p>
-					</div>
-			</React.Fragment>
+			<div className="position-absolute mt-2">
+				<h2 >List Setting </h2>
+				<p className="m-1"><strong className="header-text-sub"> Customize your to-do list:</strong><br/>
+					Passed days are labeled with <span className="highligt-text">「NOT AVALIABLE」</span>.<br/>
+					Click to toggle the dates your would like to <span className="highligt-text">「include」</span> or <span className="highligt-text">「exclude」</span> .<br/> 
+				</p>
+			</div>
 		);
 	}
 }
 
 function RenderTaskContainer({listSampleForm,toggleSelect}){
+	var modelName = '';
+	var taskContainerUsed = [];
 	if (listSampleForm.commingWeek) {
-		var taskContainerUsed = listSampleForm.taskContainerCommingWeek;
-		var modelName = 'listSampleForm.taskContainerCommingWeek[';
+		taskContainerUsed = listSampleForm.taskContainerCommingWeek;
+		modelName = 'listSampleForm.taskContainerCommingWeek[';
 	} else {
-		var taskContainerUsed = listSampleForm.taskContainer;
-		var modelName = 'listSampleForm.taskContainer[';
+		taskContainerUsed = listSampleForm.taskContainer;
+		modelName = 'listSampleForm.taskContainer[';
 	}
 	const taskContainer = (taskContainerUsed).map((container,index) => {
+			var note = '';
+			var dateNotAvaliable = true;
+			var buttonColor = '';
 			if (!container.include) {
-				var note = 'NOT AVALIABLE';
-				var dateNotAvaliable = true;
-				var buttonColor = "secondary";
+				note = 'NOT AVALIABLE';
+				dateNotAvaliable = true;
+				buttonColor = "secondary";
 			} else if (container.customSelect) {
-				var note = 'CLICK TO EXCLUDE';
-				var dateNotAvaliable = false;
-				var buttonColor = "warning";
+				note = 'CLICK TO EXCLUDE';
+				dateNotAvaliable = false;
+				buttonColor = "warning";
 			} else {
-				var note = 'CLICK TO INCLUDE';
-				var dateNotAvaliable = false;
-				var buttonColor = "secondary";
+				note = 'CLICK TO INCLUDE';
+				dateNotAvaliable = false;
+				buttonColor = "secondary";
 			}
 			return (
 				<div className="col-12 col-md-6 p-1 flexbox" key={index}>
@@ -143,15 +145,15 @@ export default class TodoListSample extends Component {
 		
 		return(
 			<>
-			<div className="container position-relative ">
-				<ListSampleHeader tasks={this.props.tasks} />
-				<div className="listSample-container align-items-center d-flex">
-					<ListSample tasks={this.props.tasks} 
-						preferenceForm={this.props.preferenceForm} 
-						listSampleForm={this.props.listSampleForm}
-						toggleSelect={this.props.toggleSelect} />
+				<div className="container position-relative ">
+					<ListSampleHeader tasks={this.props.tasks} />
+					<div className="listSample-container align-items-center d-flex">
+						<ListSample tasks={this.props.tasks} 
+							preferenceForm={this.props.preferenceForm} 
+							listSampleForm={this.props.listSampleForm}
+							toggleSelect={this.props.toggleSelect} />
+					</div>
 				</div>
-			</div>
 			</>
 		);
 	}

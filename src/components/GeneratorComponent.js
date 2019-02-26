@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem,
-	Card, CardTitle, CardText, CardBody } from 'reactstrap';
+import { CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function GeneratorHeader() {
 	return(
-		<React.Fragment>
-				<div className="position-absolute mt-2">
-					<h2 >Task Generator </h2>
-					<p className="m-1"><strong> Select a generator type:</strong><br/>
-						Would like a random task for today? Try <span className="highligt-text">「A challenge for your day」</span>! Or get a to-do list with random tasks by <span className="highligt-text">「A to-do list for your week」</span>!
-					</p>
-				</div>
-		</React.Fragment>
+		<div className="position-absolute mt-2">
+			<h2 >Task Generator </h2>
+			<p className="m-1"><strong> Select a generator type:</strong><br/>
+				Would like a random task for today? Try <span className="highligt-text">「A challenge for your day」</span>! Or get a to-do list with random tasks by <span className="highligt-text">「A to-do list for your week」</span>!
+			</p>
+		</div>
 	);
 }
 
@@ -41,10 +38,6 @@ function GeneratorType() {
 }
 
 export default class Generator extends Component {
-	constructor(props) {
-		super(props);
-
-	}
 
 	render() {
 		return (
