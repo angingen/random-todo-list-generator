@@ -20,3 +20,5 @@ Set the preference of your random tasks, including the task categories and lengt
 You can view tasks and their descriptions based on the chosen category on the Task Library. Feel free to propose your own task by clicking the `+` button.
 
 **`More tasks will be added to the library gradually.`**
+
+[View project demonstration](https://www.jingwenw.com/projects/random-todo-list)
