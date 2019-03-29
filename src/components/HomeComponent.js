@@ -2,13 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 function Home() {
 	return(
-		<div className="container flex-center-align">
-
+		<div className="container flex-center-align home-section">
 				<h1>Random To-do List Generator</h1>
-				<h3>Life is better with a plan</h3>
 				<p className="mt-3 home-text">
 					Generator your own to-do list from a wide variaty of tasks.<br/>
-					Customize your random selections to best suit your neeed. <br/>
+					Customize your random task selection to best suit your neeed. <br/>
 					All in two simple steps!
 				</p>
 				<div className="home-buttons">

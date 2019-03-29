@@ -89,8 +89,6 @@ function ListSample ({tasks,preferenceForm,listSampleForm,toggleSelect}){
 				<Row className="justify-content-center">
 					<div className="col-12 col-lg-10">
 						<Card className="p-2 m-3">
-							<h5 className="align-self-center">LIST CUSTOMIZING</h5>
-							<hr className="mt-1" />
 							<CardBody className="pt-0">
 								<Form model="listSampleForm">
 									<Row className="form-group">

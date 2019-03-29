@@ -1,0 +1,95 @@
+// (。_。)
+@media (max-width: 767px) {
+    #main {
+        .preference-container{
+            min-height: 1000px;
+            padding-top: 150px;
+        }
+        .challenge-container{
+            min-height: 800px;
+            padding-top: 100px;
+        }
+    
+        .listSample-container{
+            min-height: 1200px;
+            padding-top: 150px;
+        }
+        .list-page-container{
+            padding-top: 220px;
+        }
+        #remainingTasksButton-md{
+            width: 100px;
+            min-height: 45px;
+            #remainingTasks {
+                min-width: 10px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 576px) {
+    body {
+        min-width: 320px;
+        overflow: auto;
+    }
+    #main {
+        .preference-container{
+            padding-top: 200px;
+        }
+
+        .list-page-container{
+            
+            padding-top: 250px;
+        }
+        .task-container-todolist, .task-container-sample {
+            p, div{
+                font-size: 0.8em;
+            }
+        }
+        .task-sample-button {
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .header-text-sub{
+            font-size: 1.15rem;
+        }
+
+        .position-absolute p{
+            font-size: 0.9rem;
+        }
+
+        .generator-page-container{
+            min-height: 850px;
+        }
+
+        h2{
+            font-size: 1.85rem;
+        }
+        .taskCard {
+
+            div.task-title {
+                font-size: 0.9rem;
+                font-weight: bold;
+            }
+
+            p {
+                font-size: 0.85rem;
+            }
+            .card-subtitle {
+                font-size: 0.75rem;
+            }
+        }
+
+        h1{
+            font-size: 1.3rem;
+        }
+
+        p.home-text{
+            font-size: 0.6rem;
+            text-align: center;
+        }
+    }
+}

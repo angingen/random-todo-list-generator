@@ -1,0 +1,30 @@
+@mixin setbtn($color) {
+    background-color: $color;
+    border: 1px solid $color;
+}
+
+.badge-info{
+    background-color: $cs-green;
+}
+  
+.badge-warning, .btn-warning{
+    @include setbtn($cs-pink-lt);
+}
+.btn-warning:hover {
+    @include setbtn($cs-pink-lt-hv);
+}
+
+.btn-primary{
+    @include setbtn($cs-green);
+}
+.btn-primary:hover{
+    @include setbtn($cs-green-dk);
+}
+
+.badge-danger, .btn-danger:hover{
+    @include setbtn($cs-pink);
+}
+
+div.btn-toolbar .tags-list:hover {
+    cursor: pointer;
+}

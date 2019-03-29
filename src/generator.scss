@@ -1,0 +1,42 @@
+.generator-page-container{
+    min-height: 600px;
+    .generator-container {
+      height: 100%;
+      padding-top: 46px;
+      .row {
+        margin: 0px;
+      }
+      
+        a, a:hover{
+          text-decoration: none;
+          color:$text-df;
+        }
+  
+      .generator-card {
+        margin: 10px;
+        max-height: 300px;
+        min-height: 250px;
+        border-radius: 10px;
+        background-color: $card-lt-grey;
+        box-shadow:0 2px 2px 0 $lt-dark;
+  
+        .card-body {
+          display: flex;
+          justify-content: space-between;
+          
+            
+          img {
+            align-self: flex-end;
+            width: 150px;
+            height: 150px;
+          }
+        }
+      }
+  
+      .generator-card:hover, .tags-list:hover {
+        cursor: pointer;
+        box-shadow:0 5px 10px 0 $lt-dark;
+        transition: box-shadow 0.2s ease-out;
+      }
+    }
+  }

@@ -68,7 +68,7 @@ class RenderLibHeader extends Component {
 				</Button>
 				</h2>
 				<Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
-					<ModalHeader toggle={this.toggleModal}>Task Proosal</ModalHeader>
+					<ModalHeader toggle={this.toggleModal}>Task Proposal</ModalHeader>
 					<ModalBody>
 						<Form model="proposalForm" onSubmit={(values) => this.handleSubmit(values)} >
 							<Row className="form-group">
@@ -288,7 +288,7 @@ function RenderTasks({tasks}) {
 				<div key={taskItem.id} className="col-12 col-md-6 col-lg-4 mt-3 mb-3 flexbox">
 					<Card className="taskCard">
 						<CardBody>
-							<h5 className="flexbox"><div>{taskItem.name}</div><Badge color="danger" className="ml-auto">{taskItem.time}{taskItem.time>1?'hrs':'hr'}</Badge></h5>
+							<div className="flexbox task-title"><div>{taskItem.name}</div><Badge color="danger" className="ml-auto">{taskItem.time}{taskItem.time>1?'hrs':'hr'}</Badge></div>
 							<CardText>{taskItem.description}</CardText>
 							<CardSubtitle><TaskAuthor /></CardSubtitle>
 							<div className="space-filler"></div>
@@ -444,7 +444,6 @@ export default class Library extends Component {
 	}
 
 	render() {
-		console.log('render function envoked');
 		return (
 			<div id="section-to-print" className="container">
 				<RenderLibHeader postProposal={this.props.postProposal} 

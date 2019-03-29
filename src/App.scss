@@ -3,7 +3,6 @@ $card-hv-ls: #FEFAD4;
 $pale-gray: #EEEBE7;
 $text-hl:#FEFAD4;
 $text-df:#212529;
-/*color scheme*/
 $cs-green:#8FB9A8;
 $cs-green-dk:#273f35;
 $cs-yellow:#FEFAD4;
@@ -11,20 +10,27 @@ $cs-pink-lt:#FCD0BA;
 $cs-pink-lt-hv:#f99b6c;
 $cs-pink:#F1828D;
 $cs-purple-dk:#765D69;
+$card-lt-grey: #f8f9fa;
+$lt-dark: #98a8b8;
 
-.cs-background{
-  background-color: snow;
-  /*background-image: repeating-linear-gradient(180deg,
-      #8FB9A8 0 1%,
-      #FEFAD4 20% 21%,
-      #FCD0BA 40% 41%,
-      #F1828D 60% 61%,
-      #765D69 99% 100%
-    );*/
+@import 'home';
+@import 'generator';
+@import 'library';
+@import 'btn-and-badge';
+@import 'media-queries';
+
+/*Shared style*/
+* {
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-h2 {
-  color: $cs-green-dk;
+h1,h2,h3 {
+  font-family: 'Baloo', cursive;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 100;
 }
 
 .text-white{
@@ -35,43 +41,6 @@ h2 {
   background-color: $cs-green;
 }
 
-#task-proposal{
-  background-color: $cs-purple-dk;
-  border: 1px solid $cs-purple-dk;
-
-}
-
-.badge-info{
-  background-color: $cs-green;
-}
-
-.badge-warning, .btn-warning{
-  background-color: $cs-pink-lt;
-  border: 1px solid $cs-pink-lt;
-}
-.btn-warning:hover {
-  background-color: $cs-pink-lt-hv;
-  border: 1px solid $cs-pink-lt-hv;
-}
-
-.btn-primary{
-  background-color: $cs-green;
-  border: 1px solid $cs-green;
-}
-.btn-primary:hover{
-  background-color: $cs-green-dk; 
-  border: 1px solid $cs-green-dk;
-}
-
-.badge-danger, .btn-danger:hover{
-  background-color: $cs-pink;
-  border: 1px solid $cs-pink;
-}
-
-div.btn-toolbar .tags-list:hover {
-  cursor: pointer;
-}
-
 /*stiky footer*/
 html, body {
   height: 100%;
@@ -80,7 +49,7 @@ html, body {
   margin: 0;
 }
 
-#footer {
+footer {
   background-color: $cs-purple-dk;
   height: 50px;
   width: 100%;
@@ -91,6 +60,7 @@ html, body {
 #main {
   flex: 1 0 auto;
   display: flex;
+  background-color: white;
 }
 
 .App {
@@ -100,45 +70,8 @@ html, body {
   justify-content: center;
 }
 
-/*task card stretch*/
-.task-author {
-  margin-left: auto;
-  text-indent: 30px;
-  font-size: 0.8em;
-}
 
-.taskCard {
-  align-items: stretch;
-  flex: 1 1 auto;
-  h5 {
-    font-size: 1rem;
-  }
-
-  p{
-    font-size: 0.9rem;
-  }
-}
-
-.card-body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.space-filler {
-  flex: 1 0 auto;
-}
-
-.flexbox{
-  display: flex;
-  flex-wrap: wrap;
-}
-
-/*task catagory*/
-.tags {
-  padding: 3px 10px;
-  border-radius: 12px;
-}
+// uncleaned css styles (´-ι_-｀)
 
 /*front page center alignment*/
 .flex-center-align {
@@ -153,48 +86,16 @@ html, body {
 .title-alignment {
   align-self: flex-start;
 }
-.generator-page-container{
-  min-height: 600px;
-  .generator-container {
-    height: 100%;
-    padding-top: 46px;
-    .row {
-      margin: 0px;
-    }
-    
-      a, a:hover{
-        text-decoration: none;
-        color:$text-df;
-      }
-
-    .generator-card {
-      margin: 10px;
-      max-height: 300px;
-      min-height: 250px;
-      border-radius: 10px;
-
-      .card-body {
-        display: flex;
-        justify-content: space-between;
-          
-        img {
-          align-self: flex-end;
-          width: 150px;
-          height: 150px;
-        }
-      }
-    }
-
-    .generator-card:hover, .tags-list:hover {
-      cursor: pointer;
-    }
-  }
-}
 
 .header-text-sub {
+  font-family: 'Baloo', cursive;
+  font-weight: 100;
   font-size: 1.25rem;
   text-align: center;
 }
+
+
+
 .highligt-text{
   background-color: $text-hl;
 }
@@ -290,87 +191,14 @@ html, body {
   min-height: 45px;
 }
 
-@media (max-width: 767px) {
-  #remainingTasksButton-md{
-    width: 100px;
-    min-height: 45px;
-
-    #remainingTasks {
-      min-width: 10px;
-      text-align: center;
-    }
-  }
-  .preference-container{
-    min-height: 1000px;
-    padding-top: 150px;
-  }
-  .challenge-container{
-    min-height: 800px;
-    padding-top: 100px;
-  }
-
-  .listSample-container{
-    min-height: 1200px;
-    padding-top: 150px;
-  }
-  .list-page-container{
-    padding-top: 220px;
-  }
+div.task-title {
+  font-family: 'Pridi', serif;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 576px) {
-  .list-page-container{
-    padding-top: 250px;
-  }
-  .task-container-todolist, .task-container-sample {
-      p, div{
-        font-size: 0.8em;
-      }
-  }
-  .task-sample-button {
-    font-size: 0.75rem;
-    font-weight: bold;
-  }
 
-  .header-text-sub{
-    font-size: 1.15rem;
-  }
 
-  .position-absolute p{
-    font-size: 0.9rem;
-  }
-
-  .generator-page-container{
-    min-height: 850px;
-  }
-
-  h2{
-    font-size: 1.85rem;
-  }
-  .taskCard {
-    h5{
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-    p {
-      font-size: 0.85rem;
-    }
-    .card-subtitle {
-      font-size: 0.75rem;
-    }
-  }
-  
-  h1{
-    font-size: 1.3rem;
-  }
-  h3{
-    font-size: 1.15rem;
-  }
-
-  p.home-text{
-    font-size: 0.6rem;
-  }
-}
 
 .task-container{
   min-height: 100px;
@@ -395,25 +223,7 @@ html, body {
   }
 }
 
-.loading-container {
 
-}
-
-.hvr-fade {
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  overflow: hidden;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: color, background-color;
-  transition-property: color, background-color;
-}
-.hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
-  background-color: $card-hv-ch;
-  color: white;
-}
 
 @media print {
   body * {
@@ -466,3 +276,9 @@ div#section-to-print {
 }
 
 
+// header 
+header {
+  a.active {
+    font-weight: bold;
+  }
+}

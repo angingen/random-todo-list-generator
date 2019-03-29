@@ -11,7 +11,8 @@ function ListHeader({tasks,randomTasks}) {
 		return( 
 			<div className="position-absolute mt-2">
 				<h2 >Random To-do List </h2>
-				<p className="m-1"><strong className="header-text-sub"> A list is generated based on your preference:</strong><br/>
+				<h3 >A list is generated based on your preference: </h3>
+				<p className="m-1">
 					It is time to challenge yourself with this to-do list!{' '} 
 					{randomTasks.filter((task)=>task).length}&nbsp;{randomTasks.filter((task)=>task).length>1? 'tasks are ':'task is '} 
 					selected for you and will take in&nbsp;total {totalTime}&nbsp;{totalTime>1? 'hours':'hour'}.<br/> 
@@ -99,11 +100,9 @@ function ListBody ({tasks,preferenceForm,listSampleForm,randomTasks,handleReset,
 				<Row className="justify-content-center">
 					<div className="col-12 col-lg-10">
 						<Card className="p-2 m-3">
-							<h5 className="align-self-center">TO-DO LIST</h5>
 							<div className="d-flex justify-content-center">
 								<i className="fa fa-random fa-lg text-cs-purple btn" onClick={()=>{newTasks()}}></i>
 							</div>
-							<hr className="mt-1" />
 							<CardBody className="pt-0">
 								<Row className="list-container">
 									<div className="d-flex align-items-center col-12">
@@ -160,11 +159,8 @@ export default class TodoList extends Component {
 		const remaningTasks = this.props.tasks.tasks.filter((task)=> {
 			let arr1 = this.props.preferenceForm.taskExclude.concat(task.category);
 			let set1 = new Set(arr1);
-			console.log(arr1.length === set1.size);
 			return (arr1.length === set1.size && task.time<=this.props.preferenceForm.time)
 		});
-
-		console.log(remaningTasks);
 
 		function getRandomInt(max){
 			return Math.floor(Math.random() * Math.floor(max));

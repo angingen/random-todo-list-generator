@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap'
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 class Header extends Component {
 	constructor(props) {
@@ -21,8 +21,7 @@ class Header extends Component {
 
 	render() {
 		return (
-			<div id="header">
-				
+			<header>
 				<Navbar className="bg-gr nav-dark" dark expand="md">
 					<div className="container">
 						<Link className="navbar-brand" to="/home"><strong>RtdLG</strong></Link>
@@ -30,20 +29,19 @@ class Header extends Component {
 						<Collapse isOpen={this.state.isOpen} navbar>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
-									<Link className="nav-link" to='/home'><span className="fa fa-home fa-lg"></span> Home</Link>
+									<NavLink className="nav-link" to='/home' activeClassName="active"><span className="fa fa-home fa-lg"></span> Home</NavLink>
 								</NavItem>
 								<NavItem>
-									<Link className="nav-link" to='/generator'><span className="fa fa-tasks fa-lg"></span> Generator</Link>
+									<NavLink className="nav-link" to='/generator' activeClassName="active"><span className="fa fa-tasks fa-lg"></span> Generator</NavLink>
 								</NavItem>
 								<NavItem>
-									<Link className="nav-link" to='/library'><span className="fa fa-book fa-lg"></span> Library</Link>
+									<NavLink className="nav-link" to='/library' activeClassName="active"><span className="fa fa-book fa-lg"></span> Library</NavLink>
 								</NavItem>
 							</Nav>
 						</Collapse>
 					</div>
-				</Navbar>
-				
-			</div>
+				</Navbar>			
+			</header>
 		);
 	}
 }

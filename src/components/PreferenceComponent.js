@@ -15,7 +15,8 @@ function PreferenceHeader({pathname,tags}) {
 		return(
 			<div className="position-absolute mt-2">
 				<h2 >Task Preference </h2>
-				<p className="m-1"><strong className="header-text-sub"> Customize your tasks:</strong><br/>
+				<h3 >Customize your tasks:</h3>
+				<p className="m-1">
 					Click to toggle the tasks categories you would like to <span className="highligt-text">「include」</span> or <span className="highligt-text">「exclude」</span>.<br/>
 					Set a <span className="highligt-text">「maximum allowable time」</span> for your tasks by adjusting the slider.<br/>
 					Click the <span className="highligt-text d-none d-md-inline">「Remaining Task button」</span><span className="highligt-text d-md-none d-sm-inline">「Next」</span> to {nextStep}
@@ -131,10 +132,8 @@ function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,dis
 				<Row className="justify-content-center align-self-center">
 				<div className="col-12 col-lg-10">
 					<Card className="p-2 m-3">
-						<h5 className="align-self-center">PREFERENCE SETTING</h5>
-						<hr className="mt-1"/>
 						<CardBody className="pt-0">
-							<Form model='preferenceForm' onSubmit={()=>{ console.log('submited')}}>
+							<Form model='preferenceForm' >
 								<Row className="form-group">
 									<Label className="col-md-6 order-md-1 text-center">Task Included</Label>
 									<Col md={6} className="order-md-3">
@@ -157,7 +156,6 @@ function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,dis
 									<Label className="order-1 order-md-1 col-lg-2 col-md-4 col-8 mt-3">Maximum time</Label>
 									<div className="order-3 order-md-3 col-lg-8 col-md-6 col-12 mt-3">
 										<Control.input type="range" model=".time" id="slider" min="0.5" max="6" step="0.5" 
-											onChange={()=>console.log('***')}
 											className="form-control" 
 											list="datamark"/>
 									</div>
@@ -186,8 +184,6 @@ function TaskPreference({tags,tasks,preferenceForm,toggleTagsIn,toggleTagsEx,dis
 		);
 	}
 }
-
-
 export default class Preference extends Component {
 	constructor(props) {
 		super(props);

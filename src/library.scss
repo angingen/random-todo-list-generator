@@ -1,0 +1,43 @@
+#task-proposal {
+    background-color: $cs-purple-dk;
+    border: 1px solid $cs-purple-dk;
+}
+/*task card stretch*/
+.task-author {
+    margin-left: auto;
+    text-indent: 30px;
+    font-size: 0.8em;
+}
+  
+.taskCard {
+    align-items: stretch;
+    flex: 1 1 auto;
+    div.task-title {
+        font-size: 1rem;
+    }
+
+    p{
+        font-size: 0.9rem;
+    }
+}
+
+.card-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.space-filler {
+    flex: 1 0 auto;
+}
+
+.flexbox{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*task catagory*/
+.tags {
+    padding: 3px 10px;
+    border-radius: 12px;
+}
